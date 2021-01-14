@@ -25,29 +25,6 @@ def standard_dynamic_mode_decomposition(Gtot, thrshhld):
     phim = (np.linalg.solve(evcs, gm)).T
     return evcs, evls, phim, Ga
 
-def polynomial_kernel():
-    pass
-
-def sinc_kernel():
-    pass
-
-def radial_basis_functions_kernel():
-    pass
-
-def kernel_evluation():
-    pass
-
-def kernel_dynamic_mode_decomposition(data, number_of_terms, threshhold):
-    rows, columns = data.shape
-    data_average = np.matlib.repmat((np.mean(data), 1).reshape(rows, 1), 1, columns)
-    data_fluctuations_about_average = data - data_average
-    data_plus = data_fluctuations_about_average[:, 1:]
-    data_minus = data_fluctuations_about_average[:, :-1]
-    extended_data = np.zeros((rows-1,columns-1), dtype=np.float64)
-    a_matrix = np.zeros((rows - 1, columns - 1), dtype=np.float64)
-    kernel_evluation(data_minus, data_plus, rows, columns-1, number_of_terms, a_matrix, extended_data)
-    q, ssq, qh = np.linalg.svd(data, full_matrices=False)
-
 ########################################################################################################################
 # Error Computation
 ########################################################################################################################
