@@ -1,2 +1,2 @@
 # Thesis
-Files pertinent to SDSU Master Thesis advised Professor Chris Curtis
+Files pertinent to SDSU Master Thesis. Advised by Professor Chris Curtis
