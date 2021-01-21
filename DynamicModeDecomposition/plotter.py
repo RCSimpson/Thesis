@@ -24,8 +24,10 @@ def eigen_plot(eigenvectors, eigenvalues, phi_modes, show=False):
     plt.savefig('DMD_results/'+'eigen'+time_string+'.png')
     return None
 
-def data_plot(data, show=False):
+def data_plot(data, show=False, save=False):
     associated_strings = ['C3', 'C4', 'C5', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'H10', 'H11', 'H12', 'H13']
+    colors = ['r','b','g','c','y','k', 'orange', 'm', 'salmon','sienna', 'gray','plum','orangered','navy']
+    linestyles = ['--',':','-','--',':','-','--',':','-','--',':','-','--',':']
     rows, columns = data.shape
     if rows > columns:
         print('Is the matrix properly transposed? Ensure time on x-axis')
@@ -33,10 +35,10 @@ def data_plot(data, show=False):
 
     fig = plt.figure(figsize=(10,5))
     for row in range(rows):
-        plt.plot(data[row,:])
+        plt.plot(data[row,:], color=colors[row], linestyle=linestyles[row])
     plt.legend(associated_strings)
 
     if show:
         plt.show()
-
-    plt.savefig('DMD_results/'+'data'+time_string+'.png')
+    if save:
+        plt.savefig('DMD_results/'+'data'+time_string+'.png')
