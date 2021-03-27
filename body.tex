@@ -36,7 +36,8 @@ rely upon directedness to assign probability of events. Let us define the homomo
 
 \begin{dfn}
 We call $f: G \rightarrow H$ a homomorphism,
- if $f$ maps endpoints in $G=(V(G),E(G))$ to endpoints in $H=(V(H),E(H))$. i.e. $ \forall u,v \in V(G) \quad \{u,v\} \in E(G) \Rightarrow \{f(u),
+if $f$ maps endpoints in $G=(V(G),E(G))$ to endpoints in $H=(V(H),E(H))$.
+i.e. $ \forall u,v \in V(G) \quad \{u,v\} \in E(G) \Rightarrow \{f(u),
 f(v)\} \in E(H)$.
 \end{dfn}
 
@@ -139,21 +140,40 @@ property. For these reasons the field network theory has been gainign steadily i
 
 \vspace{3mm}
 Networks have been a subject of accelerating interest over the last seven decades after
-Paul Erdös and Alfréd Rényi developed their theory of random graphs. This 
+Paul Erdős and Alfréd Rényi developed their theory of random graphs. This 
 seminal theory described a small class of networks, those of single scale. Their
-random network, the Erdös-Renyi graph was found to do well for networks of small node count,
-but this graph did not exhibit the scale free property that was found across so many networks
-in the real world. 
+random network, the Erdős-Renyi graph, was found to do well for networks of small node count 
+and of simple structure, but this graph did not exhibit the scale free property that was found across so many networks
+in the real world. The Erdős–Rényi graph had a degree distribution that was approximated 
+well by a Poisson distribution. \cite{barabasi2016network} Paul Erdős and Alfréd Rényi's work
+was absolutely critical to the beginnings of Network science, but ultimately failed to 
+capture the intricacies of the real world networks. 
 
 
-Réka Albert and Albert Barbási began to develop a theory of complex networks that 
-encompasses those networks we find common in practice. Albert and Barbási 
-recognized that these complex networks are found throughout many different domains. Their
-model of preferential attachment was found to simulate scale-free networks well. It's use
+Their successors Réka Albert and Albert Barabási recognized that the Erdős–Rényi model 
+was incapabale of modeling real world phenomena, because the Erdős–Rényi model could not add
+in new nodes nor edges. Moreover all edges in the Erdős–Rényi model were added at random, but Networks
+are not random per se. They conform to rules. In three key areas the real networks differed from those
+simulated. \cite{barabasi2016network} First the real networks often had degreess that are not explainable according to a degree
+Poisson distribution. The tail of the distribution did not allow for such things, but it was 
+clearly wrong. Two - real networks often had a largest connected component - a large cluster 
+of nodes inside the network, forming a hub of activity. Finally the clustering coeffecient of a network
+decreases as the node size increases, but is overall independent of overall graph size.
+
+
+Réka Albert and Albert Barabási began to develop a theory of complex networks that 
+encompasses those networks we find common in practice. Albert and Barabási 
+recognized that these complex networks are found throughout many different domains. ALbert and Barabási contended that ultimately the 
+Erdős–Rényi failed to account for the dynamic growth of networks overtime, the entrance of new nodes
+into the netowrk. Moreover those simple networks did not include a model of preferential attachement
+as those nodes which enter the network at a new timestep prefer to attach to those nodes which are most
+connected. Their model of preferential attachment was found to simulate scale-free networks well. It's use
 has gained in popularity since it's inception.
 
-\section{Analyzing Networks}
-
+Barabasi ultimately recognized some limitations in his model such as the inability to add in edges to the network
+or to remove existing edges from the network. \cite{barabasi2016network} Now models are attempting to address
+these short comings by introducing new mechanisms into the model, but many models still ultimately rely on
+the preferential attachment mechanism formualte by Albert and Barabási.
 
 \section{What is Twitter?}
 Twitter is now, as of 2021, perhaps the preeminent example of complex network behavior in social media.
@@ -189,7 +209,15 @@ facts and rumors may spread easily and \textit{very} quickly. \cite{bessi}
 Twitter also carries substantial economic impact. Twitter is known to be a good predictor of Bitcoin prices
 the following day. \cite{bitcoin} However only a handful of twitter users actually have influence 
 although groups of people could theoretically be enought to influence market prices. \cite{stonks}
+Elon Musk is one such person who as influence as of March 2021 multiple markets driving Tesla's share
+price up and down, as well as the prices of cryptocurrencies. \cite{elontweet} \cite{elontweet2} \cite{dogecoin}
 
+Twitter's suitability as a subject of Network science is clear. One can generate Networks from Twitter 
+in a handful of ways. First there are the user accounts which are linked to one another through 
+followers and follows, in-degrees and out-degreess. One can also construct network representations 
+of network messages as discussed below in the Thij model. A user posts a message, which is then subsequently 
+retweeted by a portion of their followers, which is then reweetwed by a portion of their own followers, and 
+so on.
 
 \chapter{Motifs}
 
@@ -265,6 +293,21 @@ We wish to consider the following motifs: H3, H4, H5, H6, H7, H8, H9, H10, H11, 
 These motifs and the ways in which to count them are described in "Finding and Counting 
 Given Length Cycles" by N. Alon, R. Yuster, and U. Zwick.
 
+
+\begin{dfn}
+    Let f be a homorphism between graphs $G$ and $H$. We say that $H$ is a
+    homomorphic image of $G$ provided $f$ is surjective.
+\end{dfn}
+
+\begin{dfn}
+    A graph $H = (V_H, E_H)$ is said to be k-cyclic, for $k > 3$, if it is a
+homomorphic image of the cycle $C_k$. The number of different homomorphisms from $C_k$
+to $H$ is denoted by $C_k(H)$.  $H$ is $k$-cyclic if and only if $C_k(H) > 0$.
+\end{dfn}
+\vspace{3mm}
+
+For any graph below $H_k$ we could find a surjective homorphism that maps the $k$ cycle to the graph below. 
+In this manner we generate the following motifs.
 \vspace{3mm}
 
 \begin{figure}[h!]
@@ -339,8 +382,6 @@ $$
 Moreover we can therein see the scale-free proprty as any scaling $c$ of $k$ gives a porportional scaling
 by $c^{-\gamma}$.
 
-The model is as follows: 
-
 We first begin at $t=0$ by initializing a $m$ number of nodes and randomly distribute a number of edges between them.
 Then at each time-step $t > 0$ we introduce a new node and a $k$ number of edges between that node 
 and a $k$ number of existing nodes. We assign probabilities of attachment via 
@@ -364,18 +405,46 @@ Taking $m=2$ and $k=2$ we can visualize the development of the graph.
     \centering
 \end{figure*}
 
+The Barabási–Albert model exhibits a few characteristics that differentiate it from the 
+Erdős–Rényi model. If we consider it's diameter, the maximum distance in the network
+for $m>1$ and sufficiently large time we can write the diameter 
+
+$$\text{diam}(G) = \frac{\ln(n)}{\ln\ln N}$$
+
+The diamter grows slower than $\ln n$ meaning the graph's diameter grows slower than that of the 
+Erdős–Rényi model. We can also examine the clustering coeffecient of the model. 
+The clustering coeffecients for the preferentiall attachment model grows according to
+
+$$
+C(G) = \frac{(\ln N)^2}{\ln N}
+$$
+
+This differs from the Erdős–Rényi model by the term $(\ln N)^2$,
+which increases the clustering coefficient for large $N$.
+The  Barabási-Albert  network  is  locally  more  clustered  than a random network.
+
+
+The model itself is a good candidate to compare to the Thij model given that Thij model incoporates
+a preferential attachment mechanism itself, but is slightly more complex. The Barabási–Albert model 
+represents a simpler non-trivial model which is widely acknowledged as a useful tool
+for understanding networks across a variety of disciplines. We should however note the 
+limiatations to the Barabási–Albert model. The nodes and edges are restricted to growing linearly which
+may fail to capture certain phenomena that appears empirically. The model is also incapable 
+of removing nodes, a point on which Barabási himself has elaborated on.
+
 \chapter{Twitter and the Thij Model}
-The twitter model is a particular random graph that seeks to model the behavior in which a Twitter network 
-develops. Twitter is a social media platform in which a user, as of the current date, may post a message
+The Thij model is a particular random graph that seeks to model the behavior in which a Twitter network 
+develops. \cite{thij}  Twitter is a social media platform in which a user, as of the current date, may post a message
 to all of their followers' feeds. Those followers may then ignore, like, or retweet that message. In the
 instance they choose to retweet the message, that message is then posted to their respective timeline and a 
 new set of followers now has the opportunity to then retweet that same message. It is easy to infer that if a 
 message has recieved a significant number of retweets, then the message is more likely to be seen, and thus
 retweeted again. We suspect a preferential attachment mechanism driving popularity of the most popular tweets.
 
-However a user can retweet different messages at different times. Accounting for this one can produce
+However a user can retweet different orignal messages at different times meaning edges are generated between
+existing nodes in the network. Accounting for this one can produce
 a model better suited to twitter than the Barabási–Albert model described above. In 2014 Marijn Ten Thij
-and his coauthors developed the following Twitter Model. \cite{thij} 
+and his coauthors developed the following Twitter Model.
 
 We begin with an inital message node $n$ at time $t=0$. There is now the possibility of three events: $T1$,
 $T2$, and $T3$.
@@ -393,16 +462,13 @@ $q$ and all other non-message nodes with probability $\frac{1-q}{N}$.
 
 \vspace{3mm}
 
-We must also note that were generally be multiple message nodes in the retweet graph, and thus we have to decide for any given event
+We must also note that generally there will be multiple message nodes in the retweet graph, and thus we have to decide for any given event
 which particular message node should be retweeted. Here we introduce a preferential attachment mechanism. Thus at any time $t$
-given a $T2$ or $T3$ event is occuring the probability of a particular message node being chosen by others is given by the 
-same mechanism described in the Barabási–Albert model above. That is, letting $u_i$ be the i'th message node
-
-$$
-P(u_i) = \frac{d_i}{\sum^{N}_{n=1} d_n}
-$$
-
-Furthermore we assign probabilites to the events in the following way:
+given a $T2$ or $T3$ event occuring the probability of a particular message node being chosen by others is almost the
+same mechanism described in the Barabási–Albert model above. Instead a message node is chosen
+by the total number of descendants it has, not by the degree itself. In essence a message node
+is selected based upon the number of those who have retweeted the message, and all those who have retweeted
+retweets. 
 
 Let $\lambda \geq 0$ and $1 \geq p \geq 0$,
 \begin{align*}
@@ -425,7 +491,10 @@ of the graph over time.
 \begin{figure}[h!]
     \includegraphics[width=10cm]{Images/full-sims-graph_mid_set.png}
     \centering
-    \caption{Motif Counts for varying parameters}
+    \caption{Motif Counts for varying parameters. The scales on the y-axis differ widely,
+    but we also see prominence of different motifs dependent upon the parameter choices. 
+    Some paramters lead to large induced star subgraphs, while others may lead to 
+    highly clustered communities that may share a few connections between their nodes.}
 \end{figure}
 \newpage
 
@@ -497,6 +566,10 @@ will inform how each graph is developing.
 \begin{figure*}[h!]
     \includegraphics[width=8cm]{Images/twitter_sim_stats_3_0.2_0.8.png}
     \centering
+    \caption{Here we see a two nodes with degrees greater than 70,
+    but an abundnace of nodes with only one or two connections. This suggests
+    two large star graphs focused around two heavily connected nodes. This 
+    would produce the abundance of $H8$'s we see in the motif counts above.}
 \end{figure*}
 
 \FloatBarrier
@@ -511,6 +584,11 @@ will inform how each graph is developing.
 \begin{figure*}[h!]
     \includegraphics[width=8cm]{Images/twitter_sim_stats_3_0.8_0.8.png}
     \centering
+    \caption{This twitter simulation produces many more nodes than 
+    edges because of the frequency of $T1$ events. The vast majority of nodes only 
+    have degrees of one or two, while we see a single node with 25 connections.
+    This might suggest many small clusters of nodes with a single larger
+    cluster around a single message node.}
 \end{figure*}
 
 \FloatBarrier
@@ -531,6 +609,16 @@ sampled Barabási–Albert run. For $\lambda=0.2$ and $p=0.8$ the model was able
 three-hundred nodes very quickly in little over three-hundred whereas for $\lambda=0.2$ and $p=0.2$ it took nearly a thousand time
 steps. This is to be expected a $\lambda$ controls how often a new node enters without a new edge and
 $p$ controls the rate at which new nodes are added without attached edges or if only new edges are introduced. 
+
+\vspace{3mm}
+
+We should remark that the concept of a superstar attachment mechanism should be attributed to Shankar 
+Bahamdi and his coauthors who first proposed the mechanism in 2015 \cite{Bhamidi_2015}. Above
+we see the superstar mechanism in the parameter $q$ which dictates how given a tree is selected an edge
+is added to a root mode, an orignal message, or a retweet of that message. Bahamadi showed that the 
+mechanism itself influenced the asymptotic development of the network's qualities. Given the modifications that
+Thij has made in his model these rules may only apply to message trees within the Thij model, but they
+are worth considering.
 
 \chapter{Preferential Attachment Model Motif and Thij T2 Event Motif Dynamics}
 The preferential attachment model grows by adding a node at each time step and then
@@ -1168,7 +1256,9 @@ The $H8$ motif here generates three different motifs depending upon the nodes wh
 \end{table}
 
 \section{H9}
-xxxxx
+An $H9$ motif with an edge added anywhere doesn't produce a combinatorial jump the sample
+way other motifs might. An appearance of the $H9$ motif already
+requires a certain amount of local connectivity.
 
 \begin{figure}
     \includegraphics[width=12cm]{Images/H9_T3_evolution.png}
@@ -1208,34 +1298,36 @@ xxxxx
 \end{table}
 
 \section{H10}
-xxxxx
+The $H10$ motif is
 
 \begin{figure}
     \includegraphics[width=15cm]{Images/H10_T3_evolution.png}
 \end{figure}
 \begin{table}
     \centering
-    \begin{tabular}{||c c c c c c c||} 
+    \begin{tabular}{||c c c c c||} 
     \hline
-    Motif Count & Original Motif & Event 1 & Event 2 & Event 3 & Event 4 & Event 5 \\ [0.5ex] 
+    Motif Count & Original Motif & Event 1 & Event 2 & Event 3 \\ [0.5ex] 
     \hline\hline
-    H3 & 8 & 13 & 12 & 14 & 13 & 12\\ 
+    H3 & 4 & 10 & 8 & 10 \\ 
     \hline
-    H4 & 1 & 5 & 3 & 2 & 2 & 4\\
+    H4 & 1 & 2 & 4 & 3 \\
     \hline
-    H5 & 0 & 6 & 5 & 0 & 0 & 2\\
+    H5 & 1 & 2 & 4 & 5\\
     \hline
-    H6 & 0 & 1 & 1 & 0 & 0 & 0\\
+    H6 & 0 & 0 & 0 & 1 \\
     \hline
-    H7 & 0 & 2 & 0 & 0 & 0 & 1 \\
+    H7 & 0 & 0 & 2 & 0 \\
     \hline
-    H8 & 0 & 2 & 2 & 0 & 0 & 0\\
+    H8 & 0 & 1 & 0 & 2\\
     \hline
-    H9 & 0 & 1 & 1 & 4 & 2 & 2\\
+    H9 & 0 & 2 & 0 & 1\\
     \hline
-    H10 & 1 & 2 & 3 & 0 & 0 & 2\\
+    H10 & 1 & 2 & 4 & 2\\
     \hline
-    H11 & 0 & 0 & 0 & 0 & 0 & 0\\
+    H11 & 0 & 0 & 1 & 0\\
+    \hline
+    H12 & 0 & 1 & 0 & 0\\
     \hline
    \end{tabular}
    \caption{Variations of the $T3$ event on the $H10$ motif}
@@ -1366,6 +1458,11 @@ xxxxx
 
 
 \section{In summary of the T3 events}
+
+The $T3$ events above may explain some heavier clustering for high $\lambda$ in the Thij model allowing
+for the generation of motifs that one may not see easily find using the induced star subgraph explanation. 
+Adding in edges of existing nodes makes the likelihood of three-cycle or four-cycle subgraphs 
+being found in the network.
 
 
 \chapter{Motif Correlation}
@@ -1813,14 +1910,14 @@ and then compute the approximated Koopman modes. To visualize the modes on the p
 one must only multiple by the respective covariances. 
 
 
-
+\section{DMD: Barabási–Albert m=1}
 We now reach a crescendo, the results of the Dynamic Mode Decomposition algorithim as applied to the
 motif counts of simulated networks. The results will be separated into two parts: DMD and KDMD. We will examine the base case first, DMD as applied to the 
 Barabási–Albert motif counts. Thereafter we will examine several parameter choices for the Thij model,
-and then look at the distribution of eigenvalues across many parameter choices.
-
-
-\section{DMD: Barabási–Albert}
+and then look at the distribution of eigenvalues across many parameter choices. Below the Koopman modes
+and eigenvalues are as discussed above. The phi modes are simply the weighting of each Koopman mode 
+at each timestep. These tell us how much energy the respective Koopman mode contributes at a given time
+step.
 
 We can now consider DMD results of the Barabási–Albert motif counts. We show below
 the $m=1$ and $m=2$ case to observe difference and similarities between the approximated 
@@ -1828,21 +1925,48 @@ Koopman modes and eigenvalues.
 
 For the $m=1$ case we know that a new node and edge will be added at everytime step. Moreover from our
 correlation and covariance heatmaps above we know the the only motifs that change in the $m=1$ case 
-are as such: / 
+are as such: 
 
 \newpage
 
 \begin{figure*}
-    \includegraphics[width=12cm]{Images/poissonprocess_pref_attach_1.png}
+    \includegraphics[width=10cm]{Images/poissonprocess_pref_attach_1.png}
     \centering
 \end{figure*}
 
 \begin{figure*}
-    \includegraphics[width=8cm]{Images/m1k300eigen.png}
+    \includegraphics[width=10cm]{Images/DMDm1k300eigen-1.png}
+    \centering
+\end{figure*}
+
+\begin{figure*}
+    \includegraphics[width=12cm]{Images/DMDm1k300eigen-2.png}
     \centering
 \end{figure*}
 
 \clearpage
+
+\section{KDMD: Barabási-Albert m=1}
+
+We now examine the same simulations through the KDMD method.
+
+\FloatBarrier
+
+\begin{figure*}
+    \includegraphics[width=10cm]{Images/KDMDm1k300eigen-1.png}
+    \centering
+\end{figure*}
+
+\begin{figure*}
+    \includegraphics[width=12cm]{Images/KDMDm1k300eigen-2.png}
+    \centering
+\end{figure*}
+
+\clearpage
+
+\FloatBarrier
+
+\section{DMD: Barabási–Albert m=2}
 
 \begin{figure*}
     \includegraphics[width=12cm]{Images/poissonprocess_pref_attach_2.png}
@@ -1850,28 +1974,31 @@ are as such: /
 \end{figure*}
 
 \begin{figure*}
-    \includegraphics[width=8cm]{Images/m2k300eigen.png}
-    \centering
-\end{figure*}
-
-\FloatBarrier
-
-\section{KDMD: Barabási-Albert}
-
-We now examine the same simulations through the KDMD method.
-
-\FloatBarrier
-\begin{figure*}
-    \includegraphics[width=8cm]{Images/KDMDm1k300eigen.png}
+    \includegraphics[width=10cm]{Images/DMDm2k300eigen-1.png}
     \centering
 \end{figure*}
 
 \begin{figure*}
-    \includegraphics[width=8cm]{Images/KDMDm2k300eigen.png}
+    \includegraphics[width=12cm]{Images/DMDm2k300eigen-2.png}
     \centering
 \end{figure*}
 
-\FloatBarrier
+\clearpage
+
+\section{KDMD: Barabási–Albert m=2}
+
+\begin{figure*}
+    \includegraphics[width=10cm]{Images/KDMDm2k300eigen-1.png}
+    \centering
+\end{figure*}
+
+\begin{figure*}
+    \includegraphics[width=12cm]{Images/KDMDm2k300eigen-2.png}
+    \centering
+\end{figure*}
+
+\clearpage
+
 \section{DMD: Thij with $\lambda=0.2$, $p=0.2$}
 \begin{figure*}
     \includegraphics[width=12cm]{Images/twitter_counts_020209.png}
@@ -1879,18 +2006,70 @@ We now examine the same simulations through the KDMD method.
 \end{figure*}
 
 
+\begin{figure*}
+    \includegraphics[width=10cm]{Images/DMD_twitter_020209-1.png}
+    \centering
+\end{figure*}
+
+\begin{figure*}
+    \includegraphics[width=12cm]{Images/DMD_twitter_020209-2.png}
+    \centering
+\end{figure*}
+
 \section{KDMD: Thij with $\lambda=0.2$, $p=0.2$}
 
 \FloatBarrier
 
+
+\begin{figure*}
+    \includegraphics[width=10cm]{Images/KDMD_twitter_020209-1.png}
+    \centering
+\end{figure*}
+
+\begin{figure*}
+    \includegraphics[width=12cm]{Images/KDMD_twitter_020209-2.png}
+    \centering
+\end{figure*}
+
+\FloatBarrier
 \section{DMD: Thij with $\lambda=0.2$, $p=0.8$}
 \begin{figure*}
     \includegraphics[width=12cm]{Images/twitter_counts_020809.png}
     \centering
+    \caption{Motif counts for Thij model with $\lambda=0.2$,$p=0.8$.}
 \end{figure*}
+
+\begin{figure*}
+    \includegraphics[width=10cm]{Images/DMD_twitter_020809-1.png}
+    \centering
+    \caption{Approximated eigenvalues by DMD for Thij model
+    with $\lambda=0.2$,$p=0.8$.}
+\end{figure*}
+
+\begin{figure*}
+    \includegraphics[width=12cm]{Images/DMD_twitter_020809-2.png}
+    \centering
+    \caption{Approximated Koopman modes by DMD for Thij model
+    with $\lambda=0.2$,$p=0.8$.}
+\end{figure*}
+
 
 \section{KDMD: Thij with $\lambda=0.2$, $p=0.8$}
 
+
+\begin{figure*}
+    \includegraphics[width=10cm]{Images/KDMD_twitter_020809-1.png}
+    \centering
+    \caption{Approximated eigenvalues by KDMD for Thij model
+    with $\lambda=0.2$,$p=0.8$.}
+\end{figure*}
+
+\begin{figure*}
+    \includegraphics[width=12cm]{Images/KDMD_twitter_020809-2.png}
+    \centering
+    \caption{Approximated eigenvalues by KDMD for Thij model
+    with $\lambda=0.2$,$p=0.8$.}
+\end{figure*}
 
 \FloatBarrier
 
@@ -1901,37 +2080,129 @@ We now examine the same simulations through the KDMD method.
     \centering
 \end{figure*}
 
+\begin{figure*}
+    \includegraphics[width=10cm]{Images/DMD_twitter_040409-1.png}
+    \centering
+    \caption{Approximated eigenvalues by DMD for Thij model
+    with $\lambda=0.4$,$p=0.4$.}
+\end{figure*}
+
+\begin{figure*}
+    \includegraphics[width=12cm]{Images/DMD_twitter_040409-2.png}
+    \centering
+    \caption{Approximated Koopman modes by DMD for Thij model
+    with $\lambda=0.4$,$p=0.4$.}
+\end{figure*}
+ 
+
+\clearpage
+
 \section{KDMD: Thij with $\lambda=0.4$, $p=0.4$}
+
+\begin{figure*}
+    \includegraphics[width=10cm]{Images/KDMD_twitter_040409-1.png}
+    \centering
+    \caption{Approximated eigenvalues by KDMD for Thij model
+    with $\lambda=0.4$,$p=0.4$.}
+\end{figure*}
+
+\begin{figure*}
+    \includegraphics[width=12cm]{Images/KDMD_twitter_040409-2.png}
+    \centering
+    \caption{Approximated Koopman modes by KDMD for Thij model
+    with $\lambda=0.4$,$p=0.4$.}
+\end{figure*}
 
 
 \FloatBarrier
+
+\clearpage
 
 \section{DMD: Thij with $\lambda=0.8$, $p=0.2$}
 \begin{figure*}
     \includegraphics[width=12cm]{Images/twitter_counts_080209.png}
     \centering
+    \caption{Motif counts for Thij simulation with $\lambda=0.8$,$p=0.2$}
 \end{figure*}
 
+\begin{figure*}
+    \includegraphics[width=10cm]{Images/DMD_twitter_080209-1.png}
+    \centering
+    \caption{Approximated eigenvalues by DMD for Thij model
+    with $\lambda=0.8$,$p=0.2$.}
+\end{figure*}
+
+\begin{figure*}
+    \includegraphics[width=12cm]{Images/DMD_twitter_080209-2.png}
+    \centering
+    \caption{Approximated Koopman modes by DMD for Thij model
+    with $\lambda=0.8$,$p=0.2$.}
+\end{figure*}
+
+
+\clearpage
 \section{KDMD: Thij with $\lambda=0.8$, $p=0.2$}
 
 
+\begin{figure*}
+    \includegraphics[width=10cm]{Images/KDMD_twitter_080209-1.png}
+    \centering
+    \caption{Approximated eigenvalues by KDMD for Thij model
+    with $\lambda=0.8$,$p=0.2$.}
+\end{figure*}
+
+\begin{figure*}
+    \includegraphics[width=12cm]{Images/KDMD_twitter_080209-2.png}
+    \centering
+    \caption{Approximated Koopman modes by KDMD for Thij model
+    with $\lambda=0.8$,$p=0.2$.}
+\end{figure*}
 
 \FloatBarrier
+
+\clearpage
 
 \section{DMD: Thij with $\lambda=0.8$, $p=0.8$}
 \begin{figure*}
     \includegraphics[width=12cm]{Images/twitter_counts_080809.png}
     \centering
+    \caption{Motif counts for Thij model with $\lambda=0.8$,$p=0.8$.}
+\end{figure*}
+
+\begin{figure*}
+    \includegraphics[width=10cm]{Images/DMD_twitter_080809-1.png}
+    \centering
+    \caption{Approximated eigenvalues by DMD for Thij model
+    with $\lambda=0.8$,$p=0.8$.}
+\end{figure*}
+
+\begin{figure*}
+    \includegraphics[width=12cm]{Images/DMD_twitter_080809-2.png}
+    \centering
+    \caption{Approximated Koopman modes by DMD for Thij model
+    with $\lambda=0.8$,$p=0.8$.}
 \end{figure*}
 
 \section{KDMD: Thij with $\lambda=0.8$, $p=0.8$}
 
+\begin{figure*}
+    \includegraphics[width=10cm]{Images/KDMD_twitter_080809-1.png}
+    \centering
+    \caption{Approximated eigenvalues by KDMD for Thij model
+    with $\lambda=0.8$,$p=0.8$.}
+\end{figure*}
 
+\begin{figure*}
+    \includegraphics[width=12cm]{Images/KDMD_twitter_080809-2.png}
+    \centering
+    \caption{Approximated Koopman modes by KDMD for Thij model
+    with $\lambda=0.8$,$p=0.8$.}
+\end{figure*}
 
 \FloatBarrier
 
 
-\section{Accuracy of our Approximations}
+\section{Accuracy of Methods}
 
 We obviously want to know how DMD handles different parameter simulations of the Thij model,
 but also how it compares to KDMD. We also need to evaluate how the two accruacy criterion vary across
@@ -1956,23 +2227,27 @@ Barabási–Albert models.
 \end{table}
 
 \begin{figure}
-    \includegraphics[width=5cm]{Images/mode_error_dmd_prefattach1.png}
+    \includegraphics[width=8cm]{Images/mode_error_dmd_prefattach1.png}
     \centering
+    \caption{DMD Mode error for preferential attachment with $m=1$}
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=5cm]{Images/mode_error_kdmd_prefattach1.png}
+    \includegraphics[width=8cm]{Images/mode_error_kdmd_prefattach1.png}
     \centering
+    \caption{KDMD Mode error for preferential attachment with $m=1$}
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=5cm]{Images/mode_error_dmd_prefattach2.png}
+    \includegraphics[width=8cm]{Images/mode_error_dmd_prefattach2.png}
     \centering
+    \caption{KDMD Mode error for preferential attachment with $m=2$}
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=5cm]{Images/mode_error_kdmd_prefattach2.png}
+    \includegraphics[width=8cm]{Images/mode_error_kdmd_prefattach2.png}
     \centering
+    \caption{KDMD Mode error for preferential attachment with $m=2$}
 \end{figure}
 
 \FloatBarrier
@@ -2002,82 +2277,124 @@ We still need to consider performance on the more complex Thij model.
    \label{table:15}
 \end{table}
 
-Now we can evalue the respective mode errors.
+Now we can evalute the respective mode errors.
 
 \begin{figure}
-    \includegraphics[width=5cm]{Images/mode_error_dmd_twitter_020209.png}
+    \includegraphics[width=8cm]{Images/mode_error_dmd_twitter_020209.png}
     \centering
     \caption{DMD mode error for Thij model $(0.2,0.2,0.9)$}
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=5cm]{Images/mode_error_kdmd_twitter_020209.png}
+    \includegraphics[width=8cm]{Images/mode_error_kdmd_twitter_020209.png}
     \centering
     \caption{KDMD mode error for Thij model $(0.2,0.2,0.9)$}
 \end{figure}
 
 
 \begin{figure}
-    \includegraphics[width=5cm]{Images/mode_error_dmd_twitter_040409.png}
+    \includegraphics[width=8cm]{Images/mode_error_dmd_twitter_040409.png}
     \centering
     \caption{DMD mode error for Thij model $(0.4,0.4,0.9)$}
 \end{figure}
 
 
 \begin{figure}
-    \includegraphics[width=5cm]{Images/mode_error_kdmd_twitter_040409.png}
+    \includegraphics[width=8cm]{Images/mode_error_kdmd_twitter_040409.png}
     \centering
     \caption{KDMD mode error for Thij model $(0.4,0.4,0.9)$}
 \end{figure}
 
 
 \begin{figure}
-    \includegraphics[width=5cm]{Images/mode_error_dmd_twitter_020809.png}
+    \includegraphics[width=8cm]{Images/mode_error_dmd_twitter_020809.png}
     \centering
     \caption{DMD mode error for Thij model $(0.2,0.8,0.9)$}
 \end{figure}
 
 
 \begin{figure}
-    \includegraphics[width=5cm]{Images/mode_error_kdmd_twitter_020809.png}
+    \includegraphics[width=8cm]{Images/mode_error_kdmd_twitter_020809.png}
     \centering
     \caption{KDMD mode error for Thij model $(0.2,0.8,0.9)$}
 \end{figure}
 
 
 \begin{figure}
-    \includegraphics[width=5cm]{Images/mode_error_dmd_twitter_080209.png}
+    \includegraphics[width=8cm]{Images/mode_error_dmd_twitter_080209.png}
     \centering
     \caption{DMD mode error for Thij model $(0.8,0.2,0.9)$}
 \end{figure}
 
 
 \begin{figure}
-    \includegraphics[width=5cm]{Images/mode_error_kdmd_twitter_080209.png}
+    \includegraphics[width=8cm]{Images/mode_error_kdmd_twitter_080209.png}
     \centering
     \caption{KDMD mode error for Thij model $(0.8,0.2,0.9)$}
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=5cm]{Images/mode_error_dmd_twitter_080809.png}
+    \includegraphics[width=8cm]{Images/mode_error_dmd_twitter_080809.png}
     \centering
     \caption{DMD mode error for Thij model $(0.8,0.8,0.9)$}
 \end{figure}
 
 
 \begin{figure}
-    \includegraphics[width=5cm]{Images/mode_error_kdmd_twitter_080809.png}
+    \includegraphics[width=8cm]{Images/mode_error_kdmd_twitter_080809.png}
     \centering
     \caption{KDMD mode error for Thij model $(0.8,0.8,0.9)$}
 \end{figure}
+
+\FloatBarrier
+
+From examining these mode errors we can see that generally the modes
+from the standard DMD algorithim are just as accurate, if not more 
+than the KDMD modes. DMD also performs much better in terms of one-step
+reconstruction than KDMD, which is not unexpected since 
+DMD is effectively a least-squares fit to the data. Overall given that 
+DMD is more accurate in this context, and that KDMD rquires much
+more resources DMD seems to be the better tool.
+
 
 \chapter{Discussion}
 We see from the results above that are able to sleuce out different in dynamic behavior from applying
 the Dynamic Mode Decomposition to the motif counts. The modes themselves are not orthogonal so they
 may not necessarily be picking out modes that are uncorrelated as principle componenet analysis might. 
 However each mode is associated with a dynamic behavior. Given that certain counts grow exponentially 
-fast certain modes obviously pick out and are assoicated with those features. Those modes however 
-hopefully reflection the correlation found between certain modes above.
+fast certain modes obviously pick out and are associated with those features.
+
+
+We also see above the DMD will still generate modes that are orthogonal provided that
+one of the motif counts never changes over time. The associated eigenvalue of those modes are zero,
+and thus that mode doesn't contribute to the dynamic development. KDMD will not 
+pick out orthogonal modes, but will just produce modes of dimension equal to the number of counts evolving
+over time, a consequence of the manner in which KDMD is implemented.
+
+
+For certain simulations we have a readily available a-priori explanation
+of the dynamics, the formation of large induced star subgraphs. The preferential
+attachment mechanism effectively acts as a positive feedback loop - the
+additional attachment of nodes to a node $u$ increasing
+the likelihood of the future attachment to node $u$. Even without 
+the such a tale DMD and KDMD are a capable of extracting out underlying 
+structure from those simultations which do not exhibit the same pattern
+for example a Thij model with $\lambda=0.8$,$p=2$ or $\lambda=0.8$,$p=0.8$.
+There is for any of the given simulations a handful of DMD or KDMD modes that 
+have relatively low error. 
+
+
 
 \chapter{Conclusion}
-xxxxx
+
+Using these data driven methods we are clearly able to pick out underlying structure in the motif
+counts using DMD or KDMD. It may be possible upon further study to use
+DMD or KDMD to classify networks based upon their dynamical behavior
+by examining their modes or their eigenvalues. For instance above
+we discuss the impact Twitter has had on modern politicals and the 
+prevalance of bots in spreading misinformation across Twitter. DMD or KDMD
+might show differences between those users which are human and those are 
+bots. DMD may also offer a different way of classifying those users 
+which are truly influential on Twitter, different from follower count or
+retweet count, but a way of temporal classification grounded in networks.
+
