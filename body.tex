@@ -507,24 +507,25 @@ that nodes which have a high degree are probabilistically more likely to be atta
 
 The Barabási–Albert model exhibits a few characteristics that differentiate it from the 
 Erdős–Rényi model. If we consider its diameter, the maximum distance in the network
-for $m>1$ and sufficiently large time we can write the diameter 
+for $k>1$ and sufficiently large time we can write the diameter 
 
-$$\text{diam}(G) = \frac{\ln(n)}{\ln(\ln (N))}$$
+$$\text{diam}(G) = \frac{\ln(N)}{\ln(\ln (N))}$$
 
 The diameter grows slower than $\ln(n)$ meaning the graph's diameter grows slower than that of the 
 Erdős–Rényi model. We can also examine the clustering coefficient of the model. 
-The clustering coefficients for the preferential attachment model grows according to
+The clustering coefficients for the preferential attachment model grows according to \cite{klemm_2002}
 
 $$
-C(G) = \frac{(\ln N)^2}{\ln (N)}
+C(G) = \frac{(\ln (N))^2}{N}
 $$
 
 This differs from the Erdős–Rényi model by the term $(\ln (N))^2$,
-which increases the clustering coefficient for large $N$.
-The Barabási-Albert network is locally more clustered than a random network.
+which increases the clustering coefficient for large $N$. Still both measures
+decrease, asymptotically approaching zero. 
+From this result we see Barabási-Albert network is locally more clustered than a random network for all $N$ \cite{barabasi2016network}.
 
-Motif counts in the Barabási–Albert model are dependent upon the initialization of the nodes 
-and the choice of $m$. For example, in $m=1$ the model cannot complete any new cycles. If the
+Motif counts in the Barabási–Albert model are dependent upon the initialization of the $m$ nodes 
+and the choice of $k$. For example, in $k=1$ the model cannot complete any new cycles. If the
 intial graph at $t=0$ does not contain any $C_3$ or $C_4$ appearances then any motif 
 which has an induced subgraph isomorphic to $C_3$ or $C_4$ cannot appear. The BA model 
 for $k=1$ can only attach nodes to the existing  $C_3$ or $C_4$ appearances and in that 
@@ -533,15 +534,15 @@ way generate new $H7$'s, $H8$'s, $H9$'s.
 The $k=2$ BA model is capable of generating those new $C_3$ and $C_4$ appearances in the network 
 quite easily. The radically changes the motif composition as we can see in figures BLANK.
 
-
 The model is a good candidate to compare to the Thij model, given that the Thij model incorporates
-a preferential attachment mechanism itself, but is slightly more complex. The Barabási–Albert model 
+a preferential attachment mechanism itself. The thij model is more complex and they study of how motifs interact
+in the Thij model is, in comparison, much more difficult. The Barabási–Albert model 
 represents a simpler, non-trivial model which is widely acknowledged as a useful tool
 for understanding networks across a variety of disciplines. We should note the 
 limitations to the Barabási–Albert model. The nodes and edges are restricted to growing linear which
 may fail to capture certain phenomena that appear empirically. The model is also incapable
  of removing nodes, a point on which Barabási himself has elaborated. The following model
- does account for these limitations at the cost of increased complexity.
+ does account for these first of these limitations at the cost of increased complexity.
 
 \chapter{Twitter and the Thij Model}
 \label{section:Thij model}
@@ -550,26 +551,27 @@ The Thij model is a particular random graph that seeks to model the development 
 to all of their followers' feeds. Those followers may then ignore, like, reply (comment), or retweet (quote tweet) that message. In the
 instance they choose to retweet the message, that message is then posted to their respective feed and their
 set of followers now have the opportunity to then retweet that same message. It is easy to infer that if a 
-message has received a significant number of retweets to a substantial number of followers
+message has received a significant number of retweets 
  then the message is more likely to be seen, and thus
-retweeted again. Intuitively we suspect a preferential attachment mechanism driving popularity of the most popular tweets.
+retweeted again. Intuitively, we suspect a preferential attachment mechanism driving the popularity of the most popular tweets.
 
 A user can retweet different original messages at different times meaning edges are generated between
 existing nodes in the network. Accounting for this one can produce
-a model better suited to Twitter than the Barabási–Albert model described in Chapter 3.
+a model better suited to Twitter than the Barabási–Albert model described in chapter 3.
 
-We wish to simulate a network of retweets. There are the original message nodes from users $u_i$ and retweets from users $v_i$. All the descendants of $u_i$ (all retweets of the original message and retweets of retweets)
-we loosely call a message tree. $v_i$ may be a simple retweet or a quote tweet meaning 
-$v_i$ may reasonably retweet $v_k$.
- We begin with an initial message node from user $u_{0}$ at time $t=0$. There is now the possibility of three events: $T1$,
+We wish to simulate a network of retweets. There are the original message nodes from users $u_i$ and retweets from users $v_i$. All users
+are capable of retweeting or posting original messages, but for clarity we make a distinction between the posts of original messages and retweets.
+ The set of all descendants of $u_i$ (all retweets of the original message and retweets of retweets) and the edges between them
+we loosely call a message tree. $v_i$ may be a simple retweet or a quote tweet meaning $v_i$ may reasonably retweet $v_k$ who may have added commentary to the original message.
+ The simulation starts with an initial message node from user $u_{0}$ at time $t=0$. There is now the possibility of three events: $T1$,
 $T2$, and $T3$.
 
 \vspace{3mm}
 $\pmb{T1}$: A new message node from user $u_t$ appears.
 
 \vspace{3mm}
-$\pmb{T2}$: A user $v_t$ enters the retweet network and retweets an existing user, either a $u_i$ who has posted an original message or $v_i$ with $i \neq t$ who
-has simpley retweeted another user in the network. This user $v_t$ retweets an original message node $u_i$ with 
+$\pmb{T2}$: A user $v_k$ enters the retweet network and retweets an existing user, either a $u_i$ who has posted an original message or $v_k$ with $i \neq k$ who
+has simpley retweeted another user in the network. This user $v_k$ retweets an original message node $u_i$ with 
 probability $q$ and any other node with probability $\frac{1-q}{N}$, $N$ being the total number of nodes in the network.
 
 \vspace{3mm}
@@ -587,7 +589,7 @@ is selected based upon the number of those who have retweeted the message and al
 retweets of that message.
 
 
-We now assign probabilities of $T1$, $T2$, and $T3$ events. Let $\lambda \geq 0$ and $1 \geq p \geq 0$,
+We now must assign probabilities of $T1$, $T2$, and $T3$ events. Let $\lambda \geq 0$ and $1 \geq p \geq 0$,
 \begin{align*}
     &P(T1) = \frac{\lambda}{1 + \lambda} \\
     &P(T2) = \frac{p}{1 + \lambda} \\
@@ -620,35 +622,37 @@ of the graph over time.
 
 The motif counts for various parameters help demonstrate the differences in scale 
 and structure which arise from different probability distributions. 
-Consider $\lambda>0.5$ and $p>0.5$ we see an increased chance of adding
-many new root messages, but still good possibility of introducing a new node with a new edge,
-or a new edge between existing nodes. $0<\lambda<0.5$ and $p>0.5$ means that adding a new node
-with an edge is the most likely outcome. The superstar probability $q$ means that these
-are very likely to attach to a root message node.
+considering $1>\lambda>0.5$ and $1>p\gg0.5$, we see an increased chance of adding
+many new root messages, but still good possibility of introducing a new node with a new edge, but a decreased possibility of 
+adding in only new edges. For an example of the resulting motif counts we can look to figure~\ref{fig:thij0808}. 
+What about the case $0 < \lambda \ll 0.5$ and $1 > p \gg 0.5$? Now the probability distribution is such that adding a new node
+with an edge is the most likely outcome. These parameter choices combines with the superstar parameter $q=0.9$ means that $T2$ and $T3$
+attachments are very likely to target the root message node. Below we see the resulting star pattern in the motif counts in figure~\ref{fig:thij0208}
+and the end-result in figure ~\ref{fig:network0208}.
 
 The preferential attachment mechanism then encourages
- an induced subgraph $S_{k}$ to form with $k>>1$.
- For any $k\geq3$ $S_{k}$
+ an induced subgraph $S_{k}$ to form with $k\gg 1$.
+ For any $k \gg 3$ $S_{k}$
 itself has many appearances of $H4$ and for every increase in $k$ we see an increase in the probability
 of yet another increase in $k$.
 
-Next, consider $\lambda>0.5$ and $0.5>p>0$. Here the $T1$ event should dominate the dynamics
- with many new message nodes introduced to the overall retweet network. However, these
-message nodes may only contribute to the overall motif counts provided more than 2 $T2$  events
-attach nodes to them or they become attached to some other node through a $T3$ event.
-Last we consider the case when $0.5>\lambda>0$ and $0.5>p>0$. In this case, it is the $T3$
- expected to be the most prevalent. We expect connections, governed by the attachment mechanisms, to form between nodes. Given
-the superstar attachment nodes should overwhelmingly be attached to at least one message node, and may attach 
-to each other thus forming a simple three-walk. This generates many $H7$'s and $H8$'s. If we examine the graph's development for a few different pairs of parameters, we can gain some statistical insight that
-will inform how each graph is developing.
+Next, consider $1>\lambda>0.5$ and $0.5 \gg p > 0$. Here the $T1$ event should dominate the dynamics
+ with many new message nodes introduced to the overall retweet network. However, in this scenario we have
+ a greater liklihood of $T3$ events. This means those nodes without connections are likely to become connected to other message nodes. In figures
+ ~\ref{fig:thij0802} and ~\ref{fig:network0802} we can visualize the motif development and the overall network. Looking at the final time degree
+ distribution in figure~\ref{fig:stats0802}, we see that the majority of nodes are still unconnected.
+
+Last we consider the case when $0.5 > \lambda > 0$ and $0.5 \gg p > 0$. In this case, it is the $T3$ event
+ expected to be the most prevalent. For these parameter values, we see in figure ~\ref{fig:thij0202} the first four greatest motif counts almost 
+ everywhere in order are $H8$,$H10$,$H9$, and $H7$. The $T3$ mechansim allows for more $C_3$'s and $C_4$'s to form within the network.
 
 
-\clearpage
+% \clearpage
 
 \section{$\lambda=0.2$, $p=0.2$}
 
 \begin{figure*}[h!]
-    \includegraphics[width=16cm]{Images/twitter_sim_for_stats_3_0.2_0.2.png}
+    \includegraphics[width=15cm]{Images/twitter_sim_for_stats_3_0.2_0.2.png}
     \centering
     \caption{Here we see that $H8$'s lead with $H9$'s and $H10$'s. These motifs are
      closely correlated with one another throughout the time series. $H7$'s
@@ -677,7 +681,7 @@ will inform how each graph is developing.
 \section{$\lambda=0.8$, $p=0.2$}
 
 \begin{figure*}[h!]
-    \includegraphics[width=16cm]{Images/twitter_sim_for_stats_3_0.8_0.2.png}
+    \includegraphics[width=15cm]{Images/twitter_sim_for_stats_3_0.8_0.2.png}
     \centering
     \caption{For high $\lambda$ we see many new message nodes appear ($T1$ events), but
     with low $p$ we should see many $T3$ events. $H3$ motifs are the most prevalent
@@ -692,6 +696,7 @@ will inform how each graph is developing.
      one-to-one. Here we see many, many nodes unattached with degree zero.
     For those that are attached we do see a power law describing degree distribution, but one that is not quite
     as strong as those found in other simulations.}
+    \label{fig:stats0802}
 \end{figure*}
 
 
@@ -699,6 +704,7 @@ will inform how each graph is developing.
     \includegraphics[width=14cm]{Images/final_Thij_centrality_0802.png}
     \centering
     \caption{The network for $\lambda=0.8$, $p=0.2$ at the final time-step.}
+    \label{fig:network0802}
 \end{figure*}
 
 \clearpage
@@ -732,6 +738,7 @@ will inform how each graph is developing.
     \includegraphics[width=14cm]{Images/final_Thij_centrality_0208.png}
     \centering
     \caption{The network for $\lambda=0.2$, $p=0.8$ at the final time-step.}
+    \label{fig:network0208}
 \end{figure*}
 
 \clearpage
