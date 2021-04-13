@@ -2,15 +2,17 @@
 
 
 Complex networks are structurally non-trivial and require a large set of
-tools to analyze their characteristics. To understand network development,
- we introduce a set of motifs to categorize local network structure. 
-Examining the Barabási–Albert and Thij models and their respective mechanisms of 
-network growth, we can study temporal motif interaction. We examine how the addition of
-nodes and edges affect motif composition. This analysis is insightful, but not sufficient to characterize
-network dynamics.
-We apply statistical correlation and covariance analysis to the dynamic motif counts to study those motifs which
-move together. Still we conduct further analysis, looking to charaterize the underlying system
-that drives motif counts. To this end, we use the Dynamic Mode Decomposition algorithm and the Kernel Dynamic Mode
-Decomposition algorithm to find modes (spatiotemporal coherent structures) of the system. These modes offer
-a dynamical systems perspective to understand the interactions between motif counts. Finally, we analyze
-the results from our statistical analysis, DMD, and KDMD to understand motif interaction.
+tools to analyze their characteristics. In this thesis, we implement standard statistical correlation and
+covariance methods. In addition, we implement the data-driven methods, Dynamic Mode Decomposition (DMD), and Kernel
+Dynamic Mode Decomposition (KDMD). These methods are grounded in Koopman Theory and give us a dynamical systems perspective into 
+network development. With feature matrices built from snapshots of motif counts throughout a 
+network's development, we 
+characterize the local network structure. Using our data-driven methods, we identify DMD and KDMD modes. The DMD and KDMD
+modes show low mode-error by the Rowley criterion, and are good approximations to the true Koopman modes.
+
+%list tools
+%then start talking about motifs
+%exact results - definitive endgame fucking conclusion statements
+
+%data paragraph
+%thoughts paragraph

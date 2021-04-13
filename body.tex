@@ -14,82 +14,48 @@
 \section{An Introduction}
 The social network has taken on new meaning with the advent of the computer, particularly with 
 mobile technology. Social media allows for information (and misinformation) to spread rapidly
-within and across communities which can be described by network theory, an extension of graph theory.
-Individuals and those to whom they are connected form nodes within a given network. These nodes and their
-connections form patterns in the network. These patterns (motifs) offer
+within and across communities. These communities and their interactions are well-modeled by network theory, an extension of graph theory.
+Individuals are represented as nodes in these networks, and their connections as edges. These nodes and their
+connections form patterns in the networks. These patterns, or motifs, offer
 a way to characterize the local structure of the network making them informational features. These motif counts change
-over time as users enter and leave the network. The dynamic behavior of these motif counts and how they correlate with 
-one another offers a way to understand how the network changes locally in time. This analysis can 
+over time as users enter and leave the network. The dynamic behavior of these motif counts, and how they correlate with 
+one another, offers a way to understand how the network changes locally in time. This analysis can 
 extend easily beyond social networks into other domains. In the following section, we first establish 
 some of the fundamentals of network theory.
 
 
 \section{Complex Networks}
-The terms ''network" and ''graph" are often used interchangeably as networks are represented
+The terms ''network" and ''graph" are often used interchangably as networks are represented
 via vertices and edges, but networks are graphs in specific context. In its 
 most general sense a network is comprised of objects and connections between those objects. These
-connections may be directed, undirected, or weighted representing any number of different relationships. 
-For this reason networks are found across many fields: physics, biology, economy, chemistry.
-Some networks are small and simple. Many networks are large containing many nodes and connections and some of these
-topologically (or structurially) non-trivial. These we refer to as complex networks and they are 
+connections may be directed, undirected, weighted - representing any number of different relationships. 
+The versatility and effectivness of this approach has encouraged network modeling in a 
+variety of fields: physics, sociology, biology, economy, chemistry.
+Some networks are small and simple. Most networks are large containing many nodes and connections and many of these are
+topologically (or structurally) non-trivial. These we refer to as complex networks and they are 
 commonly found in those fields mentioned above. 
 
 Complex networks differ from other networks as edges are found between vertices 
 in patterns neither completely random nor regular. Such networks often have degree distributions that are fat-tailed
 meaning a few nodes are of relatively high degree, while most other nodes are not. These networks
 are commonly called scale-free networks. The Barabási–Albert model we examine later will fall under
-this category. These networks also tend to strongly cluster, which correlates with the scale-free 
+this category. These networks also cluster, which correlates with the scale-free 
 property. 
-
-\section{A Short History}
-
-Interest in networks has been steadily increasing over the last seven decades after
-Paul Erdős and Alfréd Rényi worked to develop the theory of random graphs. This 
-seminal theory described a small class of graphs and networks. These graphs are of single scale
-and their degree distributions are generally Poisson. Their model of 
-random networks, the Erdős-Renyi graph, models networks of small node count
-and of simple structure well, but this graph does not exhibit the scale-free property that was found across so many networks
-in practice \cite{barabasi2016network}. Paul Erdős and Alfréd Rényi's work
-was absolutely critical to the beginnings of network science, but ultimately failed to 
-capture the intricacies of real networks. 
-
-
-Their successors Réka Albert and Albert Barabási recognized that the Erdős–Rényi model 
-was incapable of modeling real-world phenomena because the Erdős–Rényi model does not add
-in new nodes nor edges through a temporal process. All edges in the Erdős–Rényi model are added at random
-according to a parameter value, but complex networks are not entirely random.
-They conform to rules guiding the hand of chance. 
-In three key areas the real networks differed from those
-of the Erdős–Rényi graph \cite{barabasi2016network}.
- First, the real networks often had degree distributions 
-that are not explainable according to a Poisson distribution.
- The tail of the Poisson
-distribution did not allow for the observed degree distributions.
-Second, real networks had a sizable largest connected component - a large cluster 
-of nodes inside the network, forming a hub of activity.
- Finally, the local clustering coefficient of most networks
-decreases as the node degree decreases,
- but is independent of overall graph size. For the Erdős–Rényi model
-the local clustering coefficient is independent of the node degree and the average local clustering coefficient
-depends on the size of the whole network \cite{barabasi2016network}.
-
 
 \section{Network Analysis}
 \label{section:Network Analysis}
 Network science has many statistical measures to differentiate networks from one another. These
-measures offer different levels of insight into a network and it's strucuture.
+measures offer different levels of insight into a network and its structure.
 One such measure is the notion of centrality. There are several different types
 of centrality, but each represents a way to denote the most important vertices within a 
 given network. One such measure is degree centrality. Aptly named, degree centrality 
 assigns a weight to each vertex determined by its degree $d_i$. In chapter 3 and chapter 4, degree
 centrality is useful as the preferential attachment model's dynamics directly depend on it. The centrality 
-measures are informational about the connectivity of the network, but leave much to be desired in the way 
-of understanding structure.
-
-We also make use of the clustering coefficient in chapters 3 and 4 to characterize graph dynamics. Thij \cite{thij}
+measures are informative about the connectivity of the network, but leave much to be desired in the way 
+of understanding structure.We make use of the clustering coefficient in chapters 3 and 4 to characterize graph dynamics. Thij \cite{thij}
 notes that clustering coefficients are a way to understand how a network's density changes over time. He 
-further notes that future study of the proposed Twitter model found should include an analysis of it's temporal clustering coefficients.
-To define the clustering coeffecient we first define the neighborhood of a vertex $N_i$.
+further notes that future study of the proposed Twitter model found should include an analysis of its temporal clustering coefficients.
+To define the clustering coefficient we first define the neighborhood of a vertex $N_i$.
 
 $$
 N_i = \{v_j: e_{i,j}\in E \lor e_{j,i} \in E\}
@@ -107,13 +73,13 @@ $$
 p_i = \{ e_{jk}: e_j, e_k \in N_i, e_{j.k}\in E\}
 $$
 
-\noindent This can also be calculated by way of the adjacency matrix.
+\noindent This can also be calculated by way of the adjacency matrix described in definition ~\ref{def:adjmat}.
 
 $$
 C_i =\frac{1}{k_i(k_i-1)} \sum_{j,k} a_{i,j}a_{j,k}a_{i,k}
 $$
 
-\noindent The average clustering coefficient is as expected.
+\noindent The average clustering coefficient is calculated by arithmetic mean.
 
 $$
 {\bar C} = \frac{1}{|V|}\sum_{i} C_i
@@ -130,74 +96,75 @@ $$
 \section{What is Twitter?}
 \label{section:Twitter}
 Twitter is now, as of 2021, an eminent example of complex networks in social media.
-As of 2019 there are 330 million monthly active users on Twitter, thirteen years after the platform was
+As of 2019, there are three-hundred-thirty-million monthly active users on Twitter, thirteen years after the platform was
 established in 2006. However, according to Pew Research, the top ten percent of Twitter users tweet 138 
 tweets per month, while the bottom ninety percent of Twitter users only tweet twice per month. The top ten percent of users
-have a median 387 followers while the bottom ninety percent have only 19 median followers. The top ten percent
-also follow more users, a median of 456 accounts, compared to a median of 74 accounts for the bottom ninety percent \cite{wojcik2019sizing}.
+have a median of three-hundred-eighty-seven followers while the bottom ninety percent have only nineteen median followers. The top ten percent
+also follow more users, a median of four-hundred-fifty-six accounts, compared to a median of seventy-four accounts for the bottom ninety percent \cite{wojcik2019sizing}.
 This itself is suggestive of a Twitter being a scale-free network, but analysis confirms this \cite{Aparicio}. Twitter, as a network
-with vertices as users and edges as signifying one user following another, follows a fat-tailed degree distribution. Moreover, its estimated
-average clustering coefficient is $256,000$ times larger than what is expected for a random graph.
+with vertices as users and edges as signifying follows, exhibits a fat-tailed degree distribution. Moreover, its estimated
+average clustering coefficient is two-hundred-fifty-six-thousand times larger than expected for a random graph.
 
 
 \begin{figure}
-    \includegraphics[width=16cm]{Images/elon_graph.png}
+    \includegraphics[width=15cm]{Images/elon_graph.png}
     \centering
-    \caption{All the circles represent nodes or users in this Twitter network. The red node represents a user in the Twitter network. This user follows (denoted)
-    by the red edges Tesla, Dogecoin, and Grimes, but no others. The 
-    red user recieve all tweets and retweets from Tesla, Dogecoin, and Grimes. This user may retweet these messages
-    to outside the network bringing in more users to the network. Note the red node and the nodes it's adjacents are 
-    isomporhic to, $S_3$ or $H4$.}
+    \caption{All the circles represent nodes or users in this Twitter network. The edges between the nodes denote follows.
+     The red node is a single user in the Twitter network following Tesla, Dogecoin, and Grimes (denoted by the red edges), but no others. The 
+    red user receives all tweets and retweets from Tesla, Dogecoin, and Grimes. This user may retweet these messages
+    outside the network potentially bringing in more users to the network. Note the red node and its adjacents are isomorphic to, $S_3$ or $H4$.}
 \end{figure}
 
 
 Twitter's status as a complex network aside, the platform is also notable for its position among social networks not only for its size,
 but also its influence on culture and politics. During the 2016 election, a survey of
-thirty million tweets from two million users linked to articles that were found to be spreading
+thirty million tweets from two million users, linked articles that were found to be spreading
 false information. Moreover, this information spread based on community structure within an inclusive left-right
-influencer network. Twitter is clique-y and the communities form around 
+influencer network. Twitter is cliquey and the communities form around 
 shared interests. In online communities where exposure to the same memetic theme occurs frequently, 
 facts and rumors may spread easily and quickly \cite{bessi}.
 
 Twitter also has substantial economic impact. Twitter sentiment is known to precede fluctuations
-in the stock market \cite{Bollen2011} and Bitcoin prices \cite{bitcoin}. However only a handful of Twitter users actually have influence 
+in the stock market \cite{Bollen2011} and Bitcoin prices \cite{bitcoin}. Only a handful of Twitter users actually have influence, 
 although groups of people could theoretically be enough to influence market prices \cite{stonks}.
 Elon Musk is one such person who, as of March 2021, has influenced multiple markets driving Tesla's share
-price up and down \cite{elontweet}, as well as causing jumps in cryptocurrency prices  \cite{elontweet2} \cite{dogecoin}.
+price up and down \cite{elontweet}, as well as causing jumps in cryptocurrency prices  \cite{elontweet2} \cite{dogecoin}. Musk 
+is as of 2021, the forty-third largest Twitter account giving him much more influence than the vast majority of users.
 
-Twitter's suitability as a subject of network science is clear. One can generate networks from Twitter
- in a handful of ways. First, there are the user accounts which are linked to one another through 
-followers and follows, in-degrees and out-degrees. One can also construct network representations 
-of network messages as discussed in chapter 4. A user posts a message, which is then  
-retweeted by a portion of their followers, which is then again retweeted by a portion of their own followers, and 
-so on. It is this latter case we will consider in the Thij model.
+Twitter's suitability as a subject of network science is clear. The users and follows (and retweets) are naturally 
+described in by vertices and edges. One can generate networks from Twitter in a two ways.
+ First, there are the user accounts which are linked to one another through 
+followers and follows, in-degrees and out-degrees. One can also construct networks
+of tweets and retweets as discussed in chapter 4. A user posts a message, which is  
+retweeted by a portion of their followers, which is then again retweeted by a portion of their followers.
+ It is this latter case we will consider in the Thij model.
 
 \chapter{Motifs}
 \label{section:Motifs}
 
 Motifs are the primary object of interest as a way of characterizing the local structure of a
-network. The dynamic motif count indicates the network is evolving according to certain rules.
+network. The dynamic motif count indicates the network and the communities within are evolving according to certain rules.
 In the context of static networks, the frequency of motifs 
 has been shown to highlight system properties in biological networks \cite{biomotif} \cite{bioAlbert}.
 
 Motifs are the fundamental components of complex systems.
 The topological structure of complex networks
-is tied to the frequency and distribution of tehir motifs. Initially, the counting of 
+is tied to the frequency and distribution of motifs. Initially, the counting of 
 these motifs was treated as a static problem where the frequencies of motifs affect functions on networks \cite{motifdiscovery}.
 As the significance of motifs becomes more apparent authors have begun examining the emergence of motifs 
 via temporal edges \cite{temporalmotifs}. Our motifs will
 act as a vector of features characterizing the network at each point in time. Before we
-examine our specfic motifs we must first define common objects of graph theory such as cycles, paths, and stars
+examine our specific motifs we must first define common objects of graph theory such as cycles, paths, and stars
 which will aid us in understanding the motifs we would like to examine.
 
-\section{Common Objects of Graph Theory}
+\section{Graph Theory}
 
 In the pursuit of counting our particular motifs we require some
 ideas from graph theory. There is no reason some of these objects could not be 
-motifs on their own. We will count three-cycles and four-cycles
+motifs on their own. We will count three-cycles, four-cycles, and five-cycles
 as motifs themselves, but for this we require the non-simple cycle motifs.
-Much of the literature on motifs focuses of directed triangle motifs \cite{temporalmotifs} \cite{Milo824}, but 
-we the motifs described in this thesis are more varied.
+Much of the literature on motifs focuses on directed triangle ($C_3$) motifs \cite{temporalmotifs} \cite{Milo824}, but 
+ the motifs described in this thesis are more varied.
 Motifs are generally best described by graphs. 
 
 \begin{dfn}
@@ -221,6 +188,7 @@ edge between $u$ and $v$ to have no notion of direction.
         0 \quad \text{otherwise}
     \end{cases}
     $$
+    \label{def:adjmat}
 \end{dfn}
 
 \noindent The adjacency matrix is critical to all of our calculations to come. It renders
@@ -251,7 +219,7 @@ f(v)\} \in E(H)$.
 \end{align*}
 
 \noindent $f$ is a homomorphism by the definition presented in definition~\ref{def:homomorphism}. 
-We now define particular forms of the graph homomorphism.
+We now define particular cases of the graph homomorphism.
 
 \begin{dfn}
     We call $f: G \rightarrow H$ an isomorphism,
@@ -312,10 +280,10 @@ to a given graph.
 \begin{figure}[h!]
     \includegraphics[width=8cm]{Images/Cycle.png}
     \centering
-    \caption{A simple cycle of length 5.}
+    \caption{A simple cycle of length five.}
 \end{figure}
 
-\noindent We will wish to count cycles of length 3 and 4 which will be used in the counting of more complicated motifs.
+\noindent We will wish to count cycles of length three and four which will be used in the counting of more complicated motifs.
 
 \begin{dfn}
     A bipartite graph is a graph whose nodes may be separated into two disjoint sets $U$ and $V$
@@ -435,11 +403,32 @@ to a motif may cause a combinatorial effect or multiplicative of new motifs appe
 
 \chapter{Barabási–Albert Model}
 \label{section:BA model}
+The early models of networks failed to capture the characteristics that appear in empirical data. An
+early model proposed by Paul Erdős and Alfréd Rényi, appropiately called the Erdős–Rényi model, generates
+graphs of fixed node counts where each has the same probability of existing. 
+Réka Albert and Albert Barabási recognized the Erdős–Rényi model 
+was incapable of modeling real-world phenomena, because the Erdős–Rényi model does not add
+in new nodes or edges through a temporal process. All edges in the Erdős–Rényi model are added at random
+according to a parameter value, but complex networks are not entirely random.
+They conform to rules guiding the hand of chance. 
+In three key areas the real networks differed from those
+of the Erdős–Rényi graph \cite{barabasi2016network}.
+ First, the real networks often had degree distributions 
+that are not explainable according to a Poisson distribution.
+ The tail of the Poisson
+distribution did not allow for the observed degree distributions.
+Second, real networks had a sizable largest connected component - a large cluster 
+of nodes inside the network, forming a hub of activity.
+ Finally, the local clustering coefficient of most networks
+decreases as the node degree decreases,
+ but is independent of overall graph size. For the Erdős–Rényi model
+the local clustering coefficient is independent of the node degree and the average local clustering coefficient
+depends on the size of the whole network \cite{barabasi2016network}.
 
-Réka Albert and Albert Barabási developed a theory of complex networks that 
-encompasses those networks we find common in practice. They contended that ultimately the 
+Réka Albert and Albert Barabási developed a theory of complex networks 
+encompassing those networks we find common in practice. They contended that ultimately the 
 Erdős–Rényi model failed to account for the growth of networks over time. The addition
-of new nodes and new edges into the network generated the Netorks' defining characteristics.
+of new nodes and new edges into the network generated the networks' defining characteristics.
 Edges were also found to obey the preferential attachment
 mechanism which ascribes probabilities of attachment based upon the relative degree of the nodes in a network. 
 This model was found to simulate scale-free networks well as the model's
@@ -558,7 +547,7 @@ may fail to capture certain phenomena that appear empirically. The model is also
 \label{section:Thij model}
 The Thij model is a particular random graph that seeks to model the development of a Twitter network 
  \cite{thij}. Twitter offers a platform where a user may post a message
-to all of their followers' feeds. Those followers may then ignore, like, reply (comment) , or retweet (quote tweet) that message. In the
+to all of their followers' feeds. Those followers may then ignore, like, reply (comment), or retweet (quote tweet) that message. In the
 instance they choose to retweet the message, that message is then posted to their respective feed and their
 set of followers now have the opportunity to then retweet that same message. It is easy to infer that if a 
 message has received a significant number of retweets to a substantial number of followers
@@ -1903,10 +1892,9 @@ mechanism is what encourages the growth of those motifs. We expect to grow in a 
  around $S_k$ induced subgraphs.
 
 \chapter{Dynamic Mode Decomposition}
-Another way to characterize the development of the motifs, we
-characterize the evolution of the motifs as a dynamical system. We do this through
-dynamic mode decomposition to describe the dynamics via approximations to the modes and
- eigenvalues of the Koopman operator. The DMD algorithm produces spatiotemporal coherent structures (modes)
+In addition to using statistical methods we can view the motif counts through the lens of dynamical systems. We achieve this through
+dynamic mode decomposition to find the modes and eigenvalues of the Koopman operator.
+ The DMD algorithm produces spatiotemporal coherent structures (modes)
 which have associated temporal behavior: growth, decay, and oscillation. 
 
 \section{The Koopman Operator}
@@ -1959,22 +1947,22 @@ $$
 
 
 $$
-K(\varphi(x)) = \mu \varphi(x_k) = \varphi(x_{k+1})
+K(\varphi(x_k)) = \mu \varphi(x_k) = \varphi(x_{k+1})
 $$
 
 \noindent A vector of observables $g$ can be written in terms of a basis of eigenvectors
 
 $$
-g(x_k) = \sum^{\infty}_{k=1}\varphi_k(x) \xi_k
+g(x_{k}) = \sum^{\infty}_{j=1}\varphi_j(x_k) \xi_j
 $$
 
-\noindent which implies we can avolve the system like so
+\noindent which implies we can evolve the system like so
 
 $$
-g(x_{k+1}) = \sum^{\infty}_{k=1} \mu_k \varphi_k(x) \xi_k.
+g(x_{k+1}) = \sum^{\infty}_{k=1} \mu_j \varphi_j(x_k) \xi_j.
 $$
 
-\noindent However, finding the exact eigenfunctions, modes, and eigenvalues of $K$ analyticly
+\noindent However, finding the exact eigenfunctions, modes, and eigenvalues of $K$ analytically
 is difficult for any meaningful problem, and thus we have to resort to
 numerics to estimate them via the Dynamic Mode Decomposition.
 
@@ -2040,7 +2028,7 @@ $$
 
 \noindent where $\| \|_{F}$ denotes the Frobenius norm. We still have the matter of finding the 
 ${\tilde A}$ that minimizes the norm, which is our best approximation to $A$. We could
-use a least-squares fit or solve using Moore pseudo-inverse caculating $G_+G^{\dagger}_-$, but we instead
+use a least-squares fit or solve using Moore pseudo-inverse calculating $G_+G^{\dagger}_-$, but we instead
  make use of the r-rank singular value decomposition in the following way.
 
 \begin{align*}
@@ -2054,17 +2042,17 @@ Taking the $r$-rank of the SVD limits the number of modes and
  that still captures most of the information. 
 The columns of $U$ are the Proper Orthogonal Decomposition modes of the
  data. The associated singular values are normalized by their total.
-The singular values are weights to each mode and can be used to discard those
+The singular values act as weights and can be used to discard those
  modes which don't contribute a substantial amount of energy in the decomposition.
 
 Finally, we use an eigendecomposition on the left-hand side to find the 
-eigenvalues and associated modes of A, our Koopman modes. Once we have the Koopman modes and eigenvalues, we can begin to look at which DMD modes
+eigenvalues and associated modes of $A$, our Koopman modes. Once we have the Koopman modes and eigenvalues, we can begin to look at which DMD modes
 "contribute the most" throughout the snapshot matrix and the associated eigenvalues which describe
 their temporal behavior: growth, decay, or oscillation. We have not yet
  discussed how to choose $g$, how we build our dictionary of observables. If we choose $g$ to 
 be the identity mapping, then the method reduces to the standard DMD algorithm, where $g(x_i) = x_i$.
 Choosing any other function of $g$ in a meaningful way requires some a-priori knowledge of the system.
-A mapping $g$ can extend the dictionary of observables beyond the state space using some some appropriate 
+A mapping $g$ can extend the dictionary of observables beyond the state space using some appropriate 
 basis, usually a Taylor or Fourier basis. This is aptly called Extended Dynamic Mode Decomposition (EDMD) \cite{doi:10.1137/1.9781611974508}. A quick example of such
 a choice might be:
 
@@ -2095,12 +2083,13 @@ $$
 EDMD can quickly generate a large set of observables
  and the computational complexity of the problem increases rapidly. It suffers from the
  dimensionality problem and works well provided many more snapshots than state-space
-variables. If one is analyzing for instance two-dimensional fluid flows, the flattened matrix-snapshot
+variables. If one is analyzing, for instance, n-dimensional fluid flows, the flattened matrix-snapshot
 can easily have thousand of entries. Extending the state-space by building a dictionary with nonlinear combinations of the 
-state space will generate very large matrices \cite{williams2015kernelbased}. For that reason one applies the kernel trick. One can use the kernel function
-to ''collapse" the information of many nonlinear terms through a kernel function. In our analysis our vectors are relatively small and thus not a conventional use of KDMD. 
+state space will generate very large matrices \cite{williams2015kernelbased}. For that reason, one applies the kernel trick. Instead of evaluating
+the high dimensional state space directly, one can take inner-products of the state space using kernel functions
+to ''collapse" the information of many nonlinear terms to a single value. In our analysis, our vectors are relatively small and thus not a conventional use of KDMD. 
  KDMD still offers a way to analyze nonlinear terms through the kernel trick and as we will see in chapters 9, can produce 
- Koopman modes with realtively low mode error. 
+ Koopman modes with relatively low mode error. 
  These modes, but not their associated eigenfunctions, are similar in structure to the one's produced by DMD, but not identitical \cite{doi:10.1137/1.9781611974508}. 
 We introduce the notion of the kernel.
 
@@ -2137,7 +2126,7 @@ $$
 
 \vspace{3mm}
 
-This allows us to store a large amount of information in a single value. We generate matrices
+As mentioned, the kernel functions allow us to store a large amount of information in a single value. We generate matrices
 $\Phi^+$ and $\Phi^-$ from the polynomial basis function. Our data snapshots are as
 follows:
 
@@ -2149,7 +2138,7 @@ $$
 k (y,{\hat y}) = (1 + y^T {\hat y})^p
 $$
 
-\noindent We then construct the observable matrices $Y^T_-Y_+ = \Phi^{+}$ and $Y^T_{-} Y_{-} = \Phi^{-}$
+\noindent We then construct the observable matrices $\Phi^{+}\in \mathbb{C}^{n \times n}$ and $ \Phi^{-}\Phi^{+}\in \mathbb{C}^{n \times n}$.
 
 $$
 \Phi^{+}_{i,j} = k(Y^{+}_{i}, Y^{-}_j)
@@ -2159,9 +2148,9 @@ $$
 \Phi^{-}_{i,j} = k(Y^{-}_{i}, Y^{-}_j)
 $$
 
-\noindent Then for every element in $\Phi^{+}_{i,j}$ and $\Phi^{-}_{i,j}$ , we have a kernel between two snapshots in time. And the dimensionality of the
+\noindent Then, for every element in $\Phi^{+}_{i,j}$ and $\Phi^{-}_{i,j}$, we have a kernel between two snapshots in time. The dimensionality of the
 extended observables is not constrained by the total number of snapshots. For KDMD, we finally get
-our approximations to the Koopman modes in the familiar way, by applying the SVD and my matrix multiplication.
+our approximations to the Koopman modes by applying the SVD and using matrix multiplication to find our approximation to the matrix $A$.
 
 $$
 \Phi^{+} = {\bar A} \Phi^{-}
@@ -2170,7 +2159,7 @@ $$
 \section{Accuracy Criterion}
 For the DMD and KDMD algorithms, we evaluate how
 well the methods performed. We consider two different measures
-of accuracy. First we define the one-step reconstruction
+of accuracy. First, we define the one-step reconstruction
 error $r$. We define the matrix ${\tilde G}$ where the j'th column vectors of ${\tilde G}$ are the one-step
 reconstructions of the state space at time $j+1$ for $j=0,1,\dots, n-1$.
 
@@ -2182,64 +2171,64 @@ $$
 r = \frac{\|G_{+} - {\tilde G} \|_F}{\|G_{+}\|_F}
 $$
 
-where $\| \cdot \|_F$ denotes the Frobenius norm.
+\noindent where $\| \cdot \|_F$ denotes the Frobenius norm.
 
 We also wish to know if the approximated modes and eigenvalues are good approximations to 
-Koopman modes. Let $\xi_j$ and $\lambda$ be an approximated Koopman mode for the
- dynamical system $F$ and its corresponding eigenvalue. Provided that $\xi_j$ and $\lambda_j$ are
+Koopman modes. We define the Rowley criterion \cite{zhang2017evaluating}. Let $\xi_j$ and $\mu$ be a Koopman mode for the
+ dynamical system $F$ and its corresponding eigenvalue. Provided that $\xi_j$ and $\mu_j$ are
 a true eigenpair it follows:
 
 $$
-\xi_j \circ F = \lambda_j \xi_j
+\xi_j \circ F = \mu_j \xi_j
 $$
 
-\noindent Now, letting $\|\cdot\|$ denots the $L2$ norm, we would like to calculate 
+\noindent Now, letting $\|\cdot\|$ denote the $L2$ norm, we would like to calculate 
 
 $$
-\frac{\| \xi \circ F - \lambda \xi \|}{\| \xi \|}
+\frac{\| \xi \circ F - \mu \xi \|}{\| \xi \|}
 $$
 
-\noindent However, if we know $F$ then Dynamic Mode Decomposition wouldn't be a useful tool.
-We must then estimate $F$ using a finite number of data points. We define
+\noindent However, if we know $F$ then DMD isn't a useful tool.
+We must estimate $F$ using a finite number of data points. We take
 two data points $x_k, x_{k+1} \in X$. We can now write 
 
 $$
-{\tilde r}_{j} = \frac{\sum_{k} |\varphi_j(x_{k+1}) - \lambda_j \varphi_j(x_{k})|}{\sum_{k} |\varphi_j(x_k )|}
+{\tilde r}_{j} = \frac{\sum_{k} |\varphi_j(x_{k+1}) - \mu_j \varphi_j(x_{k})|}{\sum_{k} |\varphi_j(x_k )|}
 $$
 
-We are measuring how much each eigenfunction $\phi_j$ behaves like a Koopman eigenfunction. We can use 
-this to evaluate each mode individually. This equation gives the mode error for the j'th mode as it determines how faithfully the Dynamic Mode Decomposition
-produces a set of modes similar to those of the Koopman Operator \cite{zhang2017evaluating}. 
+This equation measures how much each eigenfunction $\phi_j$ behaves like a Koopman eigenfunction. We can use 
+this to evaluate each mode individually and could potentially use it to select modes for low-rank reconstruction \cite{zhang2017evaluating}. If ${{\tilde r}_j}$ is close to one
+the eigenpair is unreliable, because the difference in the eigenpair is of the same magnitude of the eigenfunction. Therefore a 
+good eigenpair with have a mode error of $0< {{\tilde r}_j} \ll 1$.
 
 \chapter{Results}
 
 \section{Preprocessing Data}
-Dynamic Mode Decomposition is senstive to
+Dynamic Mode Decomposition is sensitive to
  noise in the data. We implement several techniques to better the errors of the DMD modes.
   First, we modify the data via a Poisson process such that the events do not occur at each
-snapshot, but the occurrence of events occurs relative to a $\delta t$. To illustrate, suppose we have 
+snapshot, but events occur relative to a $\delta t$. Suppose we have 
 
 $$
 X = [x_1,x_2,x_3,\dots, x_n]
 $$
 
-\noindent where $x_i$ describes the motif counts at $i \Delta t = t$. We then allow
+\noindent where $x_i$ describes is a feature vector at $i \Delta t = t$. We then allow
 
 $$
-A = \frac{1}{2} \left( \frac{1}{\lambda} +  \psi(\lambda) \right)
+A = \frac{1}{2} \left( \frac{1}{\lambda} +  \psi(x;\lambda) \right), \quad \psi(x;\lambda) = \lambda e^{-\lambda x}
 $$
 
 $$
 \delta t = \min(A)
 $$
 
- $\psi(\lambda)$ is a vector of samples drawn from the exponential distribution with the same number of
- time samples and $\lambda$ is the exponent of the distribution. We then distribute events in the following
+ $\psi(x;\lambda)$ is an exponential probability distribution from which we draw a thousand samples with $\lambda=10$.
+  We then distribute events in the following
 way. Let ${\hat A}$ denote a matrix that initially only contains the value $x_1$. For $k=1,2,3,\dots$ we calculate $k \delta t$. While $k\delta t < A_i$ we append $x_i$ to 
 a ${\hat A}$. Thus we generate a new matrix ${\hat A}$ that now contains $n = \sum^{N}_{i=1} A_i \mod(\delta t)$ 
-snapshots where the interval of times between events are distributed by a Poisson process. We
- smooth the data with a window-average. This smoothing will help the DMD and KDMD generate better fits. 
- A last consideration is to center the data about the mean.
+${\hat A}$. This distributes the events according to a Poisson process. After we distribute events in tome according to this process, we
+ smooth the data with the window-average. This smoothing will help the DMD and KDMD generate better fits. Last, we center the data about its mean to improve the fit.
 
 \section{DMD: Barabási–Albert m=1}
 We now reach the results of the DMD algorithm applied to the
@@ -2255,7 +2244,7 @@ the $m=1$ and $m=2$ case to observe differences and similarities between the app
 Koopman modes and eigenvalues. 
 
 For the $m=1$ case, we know that a new node and edge are added at every time step. Moreover from our
-correlation and covariance heat maps we know the only motifs that change in the $m=1$ case 
+correlation and covariance heat maps, we know the only motifs that change in the $m=1$ case 
 are as such: 
 
 \newpage
@@ -2312,21 +2301,21 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=17cm]{Images/smooth_pref_counts_2.png}
     \centering
-    \caption{Smooth motif counts for Barabási–Albert model $k=2$.}
+    \caption{Smooth motif counts for the Barabási–Albert model with $k=2$.}
 \end{figure*}
 
 \clearpage
 \begin{figure*}
     \includegraphics[width=14cm]{Images/DMDm2k300eigen-1.png}
     \centering
-    \caption{Koopman modes by DMD for Barabási–Albert model
+    \caption{Koopman modes by DMD for the Barabási–Albert model
     with $k=2$.}
 \end{figure*}
 
 \begin{figure*}
     \includegraphics[width=12cm]{Images/DMDm2k300eigen-2.png}
     \centering
-    \caption{Mode eigenvalues by DMD for Barabási–Albert model
+    \caption{Koopman Modes by DMD for the Barabási–Albert model
     with $k=2$.}
 \end{figure*}
 
@@ -2337,14 +2326,14 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=14cm]{Images/KDMDm2k300eigen-1.png}
     \centering
-    \caption{Mode eigenvalues by KDMD for Barabási–Albert model
+    \caption{Mode eigenvalues by KDMD for the Barabási–Albert model
     with $k=2$.}
 \end{figure*}
 
 \begin{figure*}
     \includegraphics[width=12cm]{Images/KDMDm2k300eigen-2.png}
     \centering
-    \caption{Koopman modes by KDMD for Barabási–Albert model
+    \caption{Koopman modes by KDMD for the Barabási–Albert model
     with $k=2$.}
 \end{figure*}
 
@@ -2354,7 +2343,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=17cm]{Images/smooth_twitter_counts_020209.png}
     \centering
-    \caption{Smooth motif counts for Thij model
+    \caption{Smooth motif counts for the Thij model
     with $\lambda=0.2$, $p=0.2$.}
     \label{fig:pthij0202}
 \end{figure*}
@@ -2364,14 +2353,14 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=14cm]{Images/DMD_twitter_020209-1.png}
     \centering
-    \caption{Mode eigenvalues by DMD for Thij model
+    \caption{Mode eigenvalues by DMD for the Thij model
     with $\lambda=0.2$, $p=0.2$.}
 \end{figure*}
 
 \begin{figure*}
     \includegraphics[width=12cm]{Images/DMD_twitter_020209-2.png}
     \centering
-    \caption{Koopman Modes by DMD for Thij model
+    \caption{Koopman Modes by DMD for the Thij model
     with $\lambda=0.2$, $p=0.2$.}
 \end{figure*}
 
@@ -2385,14 +2374,14 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=14cm]{Images/KDMD_twitter_020209-1.png}
     \centering
-    \caption{Mode eigenvalues by KDMD for Thij model
+    \caption{Mode eigenvalues by KDMD for the Thij model
     with $\lambda=0.2$, $p=0.2$.}
 \end{figure*}
 
 \begin{figure*}
     \includegraphics[width=12cm]{Images/KDMD_twitter_020209-2.png}
     \centering
-    \caption{Koopman modes by KDMD for Thij model
+    \caption{Koopman modes by KDMD for the Thij model
     with $\lambda=0.2$, $p=0.2$.}
 \end{figure*}
 
@@ -2402,7 +2391,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=17cm]{Images/smooth_twitter_counts_020809.png}
     \centering
-    \caption{Motif counts for Thij model with $\lambda=0.2$, $p=0.8$.}
+    \caption{Motif counts for the Thij model with $\lambda=0.2$, $p=0.8$.}
     \label{fig:pthij0208}
 \end{figure*}
 
@@ -2410,7 +2399,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=14cm]{Images/DMD_twitter_020809-1.png}
     \centering
-    \caption{Mode eigenvalues by DMD for Thij model
+    \caption{Mode eigenvalues by DMD for the Thij model
     with $\lambda=0.2$, $p=0.8$.}
     \label{fig:dmd02081}
 \end{figure*}
@@ -2418,7 +2407,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=12cm]{Images/DMD_twitter_020809-2.png}
     \centering
-    \caption{Koopman modes by DMD for Thij model
+    \caption{Koopman modes by DMD for the Thij model
     with $\lambda=0.2$, $p=0.8$.}
     \label{fig:dmd02082}
 \end{figure*}
@@ -2430,7 +2419,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=14cm]{Images/KDMD_twitter_020809-1.png}
     \centering
-    \caption{Mode eigenvalues by KDMD for Thij model
+    \caption{Mode eigenvalues by KDMD for the Thij model
     with $\lambda=0.2$, $p=0.8$.}
     \label{fig:kdmd02083}
 \end{figure*}
@@ -2438,7 +2427,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width= 12cm]{Images/KDMD_twitter_020809-2.png}
     \centering
-    \caption{ Koopman modes by KDMD for Thij model
+    \caption{ Koopman modes by KDMD for the Thij model
     with $\lambda=0.2$, $p=0.8$.}
     \label{fig:kdmd02084}
 \end{figure*}
@@ -2451,7 +2440,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=17cm]{Images/smooth_twitter_counts_080209.png}
     \centering
-    \caption{Motif counts for Thij simulation with $\lambda=0.8$, $p=0.2$}
+    \caption{Motif counts for the Thij simulation with $\lambda=0.8$, $p=0.2$}
     \label{fig:pthij0802}
 \end{figure*}
 
@@ -2459,14 +2448,14 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=14cm]{Images/DMD_twitter_080209-1.png}
     \centering
-    \caption{Mode eigenvalues by DMD for Thij model
+    \caption{Mode eigenvalues by DMD for the Thij model
     with $\lambda=0.8$, $p=0.2$.}
 \end{figure*}
 
 \begin{figure*}
     \includegraphics[width=12cm]{Images/DMD_twitter_080209-2.png}
     \centering
-    \caption{Koopman modes and phi modes by DMD for Thij model
+    \caption{Koopman modes and phi modes by DMD for the Thij model
     with $\lambda=0.8$, $p=0.2$.}
 \end{figure*}
 
@@ -2478,14 +2467,14 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=14cm]{Images/KDMD_twitter_080209-1.png}
     \centering
-    \caption{Mode eigenvalues by KDMD for Thij model
+    \caption{Mode eigenvalues by KDMD for the Thij model
     with $\lambda=0.8$, $p=0.2$.}
 \end{figure*}
 
 \begin{figure*}
     \includegraphics[width=12cm]{Images/KDMD_twitter_080209-2.png}
     \centering
-    \caption{Koopman modes and phi modes by KDMD for Thij model
+    \caption{Koopman modes and phi modes by KDMD for the Thij model
     with $\lambda=0.8$, $p=0.2$.}
 \end{figure*}
 
@@ -2497,7 +2486,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=17cm]{Images/smooth_twitter_counts_080809.png}
     \centering
-    \caption{Motif counts for Thij model with $\lambda=0.8$, $p=0.8$.}
+    \caption{Motif counts for the Thij model with $\lambda=0.8$, $p=0.8$.}
     \label{fig:pthij0808}
 \end{figure*}
 
@@ -2506,7 +2495,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=14cm]{Images/DMD_twitter_080809-1.png}
     \centering
-    \caption{Mode eigenvalues by DMD for Thij model
+    \caption{Mode eigenvalues by DMD for the Thij model
     with $\lambda=0.8$, $p=0.8$.}
     \label{fig:dmd08081}
 \end{figure*}
@@ -2514,7 +2503,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=12cm]{Images/DMD_twitter_080809-2.png}
     \centering
-    \caption{Koopman modes by DMD for Thij model
+    \caption{Koopman modes by DMD for the Thij model
     with $\lambda=0.8$, $p=0.8$.}
     \label{fig:dmd08082}
 \end{figure*}
@@ -2525,7 +2514,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=14cm]{Images/KDMD_twitter_080809-1.png}
     \centering
-    \caption{Mode eigenvalues by KDMD for Thij model
+    \caption{Mode eigenvalues by KDMD for the Thij model
     with $\lambda=0.8$, $p=0.8$.}
     \label{fig:dmd08083}
 \end{figure*}
@@ -2533,7 +2522,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=12cm]{Images/KDMD_twitter_080809-2.png}
     \centering
-    \caption{Koopman modes and phi modes by KDMD for Thij model
+    \caption{Koopman modes and phi modes by KDMD for the Thij model
     with $\lambda=0.8$, $p=0.8$.}
     \label{fig:dmd08084}
 \end{figure*}
@@ -2546,7 +2535,7 @@ We now examine the same simulations through the KDMD method.
 We want to know how DMD handles different parameter simulations of the Thij model and how it compares to KDMD.
  We also need to evaluate how the two accuracy criterion described in section 8.2 perform across
 simulations and methods. We recall that we use the one-step reconstruction error, a measure of 
-how well the modes and eigenvalues replicate the data. We also define the mode error describing how 
+how well the modes and eigenvalues replicate the data. We also defined the mode error describing how 
 well each DMD mode behaves like a Koopman mode. We begin with the
 reconstruction error of the Barabási–Albert models.
 
