@@ -33,7 +33,7 @@ The versatility and effectiveness of this approach has encouraged network modeli
 variety of fields: physics, sociology, biology, economy, chemistry.
 Some networks are small and simple. Most networks are large containing many nodes and connections and many of these are
 topologically (or structurally) non-trivial. These we refer to as complex networks and they are 
-commonly found in those fields mentioned above. 
+commonly found in those fields mentioned previously. 
 
 Complex networks differ from other networks as edges are found between vertices 
 in patterns neither completely random nor regular. Such networks often have degree distributions that are fat-tailed
@@ -93,7 +93,7 @@ $$
 
 \noindent Clustering allows us to understand how dense a network is relative to a complete graph. 
 
-\section{What is Twitter?}
+\section{The Social Network Twitter}
 \label{section:Twitter}
 Twitter is now, as of 2021, an eminent example of complex networks in social media.
 As of 2019, there are 330 million monthly active users on Twitter, thirteen years after the platform was
@@ -104,17 +104,6 @@ also follow more users, a median of 456 accounts, compared to a median of 74 acc
 This itself is suggestive of a Twitter being a scale-free network, but analysis confirms this \cite{Aparicio}. Twitter, as a network
 with vertices as users and edges as signifying follows, exhibits a fat-tailed degree distribution. Moreover, its estimated
 average clustering coefficient is two-hundred-fifty-six-thousand times larger than expected for a random graph.
-
-
-\begin{figure}
-    \includegraphics[width=15cm]{Images/elon_graph.png}
-    \centering
-    \caption{All the circles represent nodes or users in this Twitter network. The edges between the nodes denote follows.
-     The red node is a single user in the Twitter network following Tesla, Dogecoin, and Grimes (denoted by the red edges), but no others. The 
-    red user receives all tweets and retweets from Tesla, Dogecoin, and Grimes. This user may retweet these messages
-    outside the network potentially bringing in more users to the network. Note the red node and its adjacents are isomorphic to, $S_3$ or $H4$.}
-\end{figure}
-
 
 Twitter's status as a complex network aside, the platform is also notable for its position among social networks not only for its size,
 but also its influence on culture and politics. During the 2016 election, a survey of
@@ -134,10 +123,20 @@ is as of 2021, the forty-third largest Twitter account giving him much more infl
 Twitter's suitability as a subject of network science is clear. The users and follows (and retweets) are naturally 
 described in by vertices and edges. One can generate networks from Twitter in a two ways.
  First, there are the user accounts which are linked to one another through 
-followers and follows, in-degrees and out-degrees. One can also construct networks
+followers and follows, in-degrees and out-degrees. An example of this is given in Figure~\ref{fig:elon_graph}. One can also construct networks
 of tweets and retweets as discussed in chapter 4. A user posts a message, which is  
 retweeted by a portion of their followers, which is then again retweeted by a portion of their followers.
  It is this latter case we will consider in the Thij model.
+
+ \begin{figure}
+    \centering
+        \includegraphics[width=15cm]{Images/elon_graph.png}
+        \caption{All the circles represent nodes or users in this Twitter network. The edges between the nodes denote follows.
+         The red node is a single user in the Twitter network following Tesla, Dogecoin, and Grimes (denoted by the red edges), but no others. The 
+        red user receives all tweets and retweets from Tesla, Dogecoin, and Grimes. This user may retweet these messages
+        outside the network potentially bringing in more users to the network. Note the red node and its adjacents are isomorphic to, $S_3$ or $H4$. \label{fig:elon_graph}}
+\end{figure}
+
 
 \chapter{Motifs}
 \label{section:Motifs}
@@ -202,14 +201,8 @@ i.e. $ \forall u,v \in V(G) \quad \{u,v\} \in E(G) \Rightarrow \{f(u),
 f(v)\} \in E(H)$.
 \end{dfn}
 
-\begin{figure}[h!]
-    \includegraphics[width=10cm]{Images/graph_homomorphism.png}
-    \centering
-    \caption{A homomorphism from G to H.}
-    \label{fig:homomorphism}
-\end{figure}
 
-\noindent  For the example in Figure~\ref{fig:homomorphism} we can define a mapping $f$ such that:
+\noindent  For example, in Figure~\ref{fig:homomorphism} we can define a mapping $f$ such that:
 
 \begin{align*}
     &f(0) = A\\
@@ -218,20 +211,22 @@ f(v)\} \in E(H)$.
     &f(3) = C\\ 
 \end{align*}
 
-\noindent $f$ is a homomorphism by the definition presented in definition~\ref{def:homomorphism}. 
+\noindent Thus $f$ is a homomorphism by the definition presented in definition~\ref{def:homomorphism}. 
 We now define particular cases of the homomorphism.
+
+
+\begin{figure}[h!]
+    \includegraphics[width=10cm]{Images/graph_homomorphism.png}
+    \centering
+    \caption{A homomorphism from G to H.}
+    \label{fig:homomorphism}
+\end{figure}
+
 
 \begin{dfn}
     We call $f: G \rightarrow H$ an isomorphism,
  if $f$ is a homomorphism and is bijective.
 \end{dfn}
-
-\begin{figure}[h!]
-    \includegraphics[width=12cm]{Images/graph_isomoprhism.png}
-    \centering
-    \caption{An isomorphism between $G$ and $H$.}
-    \label{fig:isomorphism}
-\end{figure}
 
 \noindent We can define an isomorphism $f$ for between $G$ and $H$ in the figure ~\ref{fig:isomorphism} such that:
 
@@ -247,6 +242,13 @@ We now define particular cases of the homomorphism.
     is edge-preserving, $\{u,v\} \in G \implies \{f(v),f(u)\} \in G$.
 \end{dfn}
 
+\begin{figure}[h!]
+    \includegraphics[width=12cm]{Images/graph_isomoprhism.png}
+    \centering
+    \caption{An isomorphism between $G$ and $H$.}
+    \label{fig:isomorphism}
+\end{figure}
+
 Automorphisms represent the symmetries of a graph. For instance, a $C_3$ with vertices $\{A, B, C\}$
 and the set of undirected edges $\{A,B\},\{B,C\},\{C,A\},$ has six possible automorphisms - three from rotation 
 and three from reflection of the graph. Below when counting motifs on graphs, the algorithms only count up to symmetry.
@@ -260,12 +262,13 @@ For instance, where we find an induced subgraph isomorphic to the $C_3$ we count
 \end{dfn}
 
 \noindent Induced subgraphs are vital to our understanding of how motifs interact as we add edges or nodes
-to a given graph.
+to a given graph. In Figure~\ref{fig:subgraph}, $G$ has a subgraph which does not include the edge $\{1,2\}$. If
+the edge is included in the set then we have an induced subgraph of $G$.
 
 \begin{figure}[h!]
     \includegraphics[width=16cm]{Images/subgraph.png}
     \centering
-    \caption{Example of subgraphs and induced subgraphs on $G$.}
+    \caption{Example of subgraphs and induced subgraphs on $G$.\label{fig:subgraph}}
 \end{figure}
 
 \begin{dfn}
@@ -284,12 +287,13 @@ to a given graph.
 \end{dfn}
 
 Cycles are often also referred to by the geometric objects they resemble. A three-cycle is a triangle, and a four-cycle is a square.
-The three-cycle, four-cycle, and five-cycle will feature as motifs in our feature vectors. 
+The three-cycle, four-cycle, and five-cycle will feature as motifs in our feature vectors. A five-cycle is featured in 
+Figure~\ref{fig:cycle}. 
 
 \begin{figure}[h!]
     \includegraphics[width=8cm]{Images/Cycle.png}
     \centering
-    \caption{A simple cycle of length five.}
+    \caption{A simple cycle of length five.\label{fig:cycle}}
 \end{figure}
 
 \begin{dfn}
@@ -297,14 +301,11 @@ The three-cycle, four-cycle, and five-cycle will feature as motifs in our featur
     such that there exists an edge between all vertices in $U$ and all vertices in $V$.
 \end{dfn}
 
-
-\begin{figure}[h!]
-    \includegraphics[width=8cm]{Images/Bipartite.png}
-    \centering
-    \caption{The bipartite graph $K_{2,3}$.}
-\end{figure}
-
-\FloatBarrier
+The $C3$ and $C4$ motif counts are themselves a measurement of clustering the graph. In fact, the
+global clustering coefficient defined in chapter one explicitly requires the $C3$ count in its 
+calculation. We count few bipartite motifs, but do count star graphs whose definition relies on the definition of a bipartite graph. However, the definition of a star graph $S_k$ is very useful,
+ because some of the motif counts increase exponentially
+due to the motifs that are generated as a new node or a new edge is added to the $S_k$ graph. An example of $S_4$ can be found in Figure~\ref{fig:star}.
 
 \begin{dfn}
     A star $S_n$ denotes the complete bipartite graph $K_{1,n}$. In other words 
@@ -314,14 +315,8 @@ The three-cycle, four-cycle, and five-cycle will feature as motifs in our featur
 \begin{figure}[h!]
     \includegraphics[width=8cm]{Images/Star.png}
     \centering
-    \caption{The star $S_4$.}
+    \caption{The star $S_4$. \label{fig:star}}
 \end{figure}
-
-
-The $C3$ and $C4$ motif counts are themselves a measurement of clustering the graph. In fact, the
-global clustering coefficient defined in chapter one explicitly requires the $C3$ count in its 
-calculation. We count both motifs that are almost bipartite, but have an extra edge. However, the definition of a star graph $S_k$ is very useful, because some of the motif counts increase exponentially
-due to the motifs that are generated as a new node or a new edge is added to the $S_k$ graph. 
 
 
 \newpage
@@ -329,7 +324,8 @@ due to the motifs that are generated as a new node or a new edge is added to the
 \section{Non-Simple Cycle Motifs}
 \label{section:Non-simple Motifs}
 We wish to consider motifs that we refer to as $H3$ up to $H13$.
-These motifs, and their enumerations, are described in \cite{alon}.
+These motifs, and their enumerations, are described in \cite{alon}. In Figure~\ref{fig:motifs1},
+are the graphs of all eleven motifs.
 
 \begin{dfn}
     Let $f$ be a homomorphism between graphs $G$ and $H$. We say that $H$ is a
@@ -348,12 +344,11 @@ is the only five-cyclic graph. However $H5$, $H6$, $H7$, $H8$, $H10$, $H12$, and
 all seven-cyclic.
 
 \begin{figure}[ht!]
-    \frame{\includegraphics[width=12cm]{Images/mega_motif.png}}
+    \frame{\includegraphics[width=11cm]{Images/mega_motif.png}}
     \centering
     \caption{The first four non-simple motifs. This set is comprised
     of three-walk ($H3$), a star $S_3$ ($H4$), the star $S_3$ with two vertices
-    attached ($H5$), and finally an $S_3$ with two edges added.}
-    \label{fig:motifs1}
+    attached ($H5$), and finally an $S_3$ with two edges added.\label{fig:motifs1}}
 \end{figure}
 
 % \begin{figure}[h!]
@@ -403,9 +398,10 @@ element at the i'th row and j'th column of matrix $A$. The formulae for motif co
     &N_G(H13) = \sum_{(i,j)\in E} {a^{(2)}_{i,j} \choose 3}\\
 \end{align*}
 
-We want to understand how each motif count affects another given a the addition of new nodes or edges
-in any simulation. Some motifs contain induced subgraphs isomorphic to other motifs. Simple changes
-to a motif may cause a combinatorial effect generating a large number of additional motif appearances.
+We want to understand how each motif count affects another given the addition of new nodes or edges
+in any simulation. Some motifs contain an appearance of another motif and this will affect how they interact with one another. In chapter 5, 
+an analysis of edge addition on the motif graphs shows simple changes
+to a motif's graph may cause a combinatorial effect generating a large number of new motif appearances.
 
 \chapter{Barabási–Albert Model}
 \label{section:BA model}
@@ -419,39 +415,47 @@ In three key areas, real network structure differs from
 the Erdős–Rényi model \cite{barabasi2016network}.
  First, real networks often have degree distributions 
 that are not explainable according to a Poisson distribution.
-Second, real networks had a sizable largest connected component - a large cluster 
+Second, real networks have a sizable largest connected component - a large cluster 
 of nodes inside the network, forming a hub of activity.
  Finally, the local clustering coefficient of most networks
 decreases as the node degree decreases, but is independent of overall graph size.
 
-Réka Albert and Albert Barabási developed a theory of complex networks 
-encompassing those networks we find common in practice. They found the dynamic addition
+Réka Albert and Albert Barabási developed a model of complex networks 
+encompassing those we find common in practice. They found the dynamic addition
 of new nodes and new edges to a network generate the network's defining characteristics.
-Edges were also found to obey the preferential attachment
+Edges were found to follow a preferential attachment
 mechanism, which ascribes probabilities of attachment, based upon the relative degree of the nodes in a network. 
-This model simulates scale-free networks well as the model's
-degree distribution is described by a power-law, not the Poisson distribution of the Erdős–Rényi model. 
-A network is scale-free provided the degree distribution follows a power-law. 
-
-The fraction of nodes $P$ having $N$ nodes attached for large values of $k$ is 
+Moreover, most networks are scale-free and their degree distributions follow a power law.
+The preferential attachment mechanism of the Barabási–Albert model generates this power law.
+A network is said to follow a power law if the fraction of nodes $P$ having $k$ edges is 
 
 $$
 P(N) \approx k^{-\gamma} , \quad 2< \gamma <3
 $$
+
+
 %%%%%% Left off editing here
 
-How do we model such a network? We begin at $t=0$ by initializing $m$ nodes and randomly distribute a number of edges between them
+To model such a network, we begin at $t=0$ by initializing $m$ nodes and randomly distribute a number of edges between them
 according to a uniform distribution. Then at each time-step $t > 0$, we introduce a new node 
-and $k$ edges between that node and existing nodes. We assign probabilities of attachment via the
+and $k$ edges between that node and the existing nodes. We assign probabilities of attachment to the $n$th node via the
  probability distribution:
 
 $$
-P(n) = \frac{d_n}{\sum^{N}_{i=1} d_i}
+\Pi(n) = \frac{d_n}{\sum^{N}_{i=1} d_i}
 $$
 
-\noindent where $d_i$ is the degree of the i'th node and $N$ is the total number of nodes at $t-1$.
+\noindent where $d_i$ is the degree of the $i$th node and $N$ is the total number of nodes at $t-1$.
  Nodes which have a high degree are probabilistically more likely to be attached to new nodes. 
 
+In Figure~\ref{fig:BA1}, we see that only certain motifs can be generated in the $k=1$ BA model.
+Motif counts in the Barabási–Albert model are dependent upon the initialization of the $m$ nodes 
+and the choice of $k$. For example, if $k=1$ the model cannot complete any new cycles. If the
+intial graph at $t=0$ does not contain any $C_3$ or $C_4$ appearances then any motif 
+which has an induced subgraph isomorphic to $C_3$ or $C_4$ cannot appear. The BA model 
+for $k=1$ can only attach nodes to the existing  $C_3$ or $C_4$ appearances and in that 
+way generate new $H7$'s, $H8$'s, $H9$'s. The BA model with $k=2$ is capable of generating those
+ new $C_3$, $C_4$, and $C_5$ appearances in the network quite easily in Figure~\ref{fig:BA2}.
 
 \begin{figure*}[h!]
     \includegraphics[width=16cm]{Images/pref_attach_1_counts.png}
@@ -459,7 +463,7 @@ $$
     \caption{This Barabási–Albert model is initialized with $m=8$ nodes.
     At each time-step a new node enters and is attached to $k=1$ nodes by the preferential attachment mechanism.
      Only for the motifs who have a node
-    of degree one can their respective counts increase given $k=1$. All simulations are terminated after the 
+    of degree one, can their respective counts increase given $k=1$. All simulations are terminated after the 
     network reaches a size of $300$ nodes.}
     \label{fig:BA1}
 \end{figure*}
@@ -514,7 +518,7 @@ $$\text{diam}(G) = \frac{\ln(N)}{\ln(\ln (N))}$$
 
 The diameter grows slower than $\ln(N)$ or the rate of growth for the
 Erdős–Rényi model's diameter. We can also examine the clustering coefficient of the model. 
-The clustering coefficients for the preferential attachment model grows according to \cite{klemm_2002}
+The clustering coefficients for the preferential attachment model grows according to \cite{klemm_2002}.
 
 $$
 C(G) = \frac{(\ln (N))^2}{N}
@@ -526,15 +530,7 @@ both clustering coefficients
 decrease, asymptotically approaching zero. The Barabási-Albert network is locally
  more clustered than a random network for all $N$ \cite{barabasi2016network}.
 
-Motif counts in the Barabási–Albert model are dependent upon the initialization of the $m$ nodes 
-and the choice of $k$. For example, if $k=1$ the model cannot complete any new cycles. If the
-intial graph at $t=0$ does not contain any $C_3$ or $C_4$ appearances then any motif 
-which has an induced subgraph isomorphic to $C_3$ or $C_4$ cannot appear. The BA model 
-for $k=1$ can only attach nodes to the existing  $C_3$ or $C_4$ appearances and in that 
-way generate new $H7$'s, $H8$'s, $H9$'s. The BA model with $k=2$ is capable of generating those
- new $C_3$ and $C_4$ appearances in the network quite easily.
-
-The model is a good candidate to compare to the Thij model, given that the Thij model incorporates
+The Barabási–Albert model is a good candidate to compare to the Thij model, given that the Thij model incorporates
 a preferential attachment mechanism itself. The Thij model is more complex and thee study of how motifs interact
 in the Thij model is much more difficult. The Barabási–Albert model 
 represents a simpler, non-trivial model, which is widely acknowledged as a useful tool
@@ -544,40 +540,44 @@ may fail to capture certain phenomena that appear empirically. The model is also
  of removing nodes, a point on which Barabási himself has elaborated. The following model
  does account for the first of these limitations at the cost of increased complexity.
 
-\chapter{Twitter and the Thij Model}
+\chapter{The Thij Model}
 \label{section:Thij model}
 The Thij model is a particular random graph that seeks to model the development of a Twitter network 
  \cite{thij}. Twitter offers a platform where a user may post a message
 to all of their followers' feeds. Those followers may then ignore, like, reply (comment), or retweet (quote tweet) that message. In the
-instance they choose to retweet the message, that message is then posted to their respective feed and their
-set of followers now have the opportunity to then retweet that same message. It is easy to infer that if a 
+instance they choose to retweet the message, that message is then posted to their respective feed and their own
+followers now have the opportunity to then retweet that same message. If a
 message has received a significant number of retweets the message is more likely to be seen, and thus
-retweeted again. Intuitively, we suspect a preferential attachment mechanism driving the popularity of the most popular tweets.
+retweeted again. A preferential attachment mechanism drives the popularity of the most popular tweets \cite{Aparicio}.
 
-A user can retweet different original messages at different times, meaning edges are generated between
-existing nodes in the network. Accounting for this one can produce
-a model better suited to Twitter than the Barabási–Albert model described in chapter 3.
+A user can retweet different original messages at different times, meaning edges can be generated between
+existing nodes in the network. Accounting for this, one can produce
+a model better suited to Twitter simulations than the Barabási–Albert model described in chapter 3.
 
 We wish to simulate a network of retweets. There are the original message nodes from users $u_i$ and retweets from users $v_i$. All users
-are capable of retweeting or posting original messages. For clarity we make a distinction between the posts of original messages and retweets.
- The set of all descendants of $u_i$ (all retweets of the original message and retweets of retweets) and the edges between them
-we loosely call a message tree. $v_i$ may be a simple retweet or a quote tweet meaning $v_i$ may reasonably retweet $v_k$ who may have added commentary to the original message.
- The simulation starts with an initial message node from user $u_{0}$ at time $t=0$. There is now the possibility of three events: $T1$,
-$T2$, and $T3$.
+are capable of retweeting or posting original messages. For clarity, we make a distinction between the posts of original messages and retweets.
+$v_i$ may be a simple retweet, or a quote tweet, meaning $v_i$ may reasonably retweet $v_k$ who may have added commentary to the original message.
+ The simulation starts with an initial message node from user $u_{0}$ at time $t=0$. For all time-steps, there is now the possibility of three events: $T1$,
+$T2$, and $T3$. 
 
 \vspace{3mm}
-$\pmb{T1}$: A new message node from user $u_t$ appears.
+
+$\pmb{T1}$: A new message node from user $u_k$ appears.
 
 \vspace{3mm}
-$\pmb{T2}$: A user $v_k$ enters the retweet network and retweets an existing user, either a $u_i$ who has posted an original message or $v_k$ with $i \neq k$ who
+
+$\pmb{T2}$: A user $v_k$ enters the retweet network and retweets an existing user, either a $u_i$ who has posted an original message or $v_i$ with $i \neq k$ who
 has simply retweeted another user in the network. This user $v_k$ retweets an original message node $u_i$ with 
 probability $q$ and any other node with probability $\frac{1-q}{N}$. $N$ is the total number of nodes in the network.
 
 \vspace{3mm}
-$\pmb{T3}$: An existing user $v_i$ retweets another existing user $u_i$ or $v_k$. Once again the retweeter retweets a message node with probability 
+
+$\pmb{T3}$: An existing user $v_i$ retweets another existing user $u_i$ or $v_j$. The retweeter retweets a message node with probability 
 $q$ and all other message or retweet nodes with probability $\frac{1-q}{N}$.
 
-We must also note that, generally, there will be multiple message nodes in the retweet graph, and thus,
+\vspace{3mm}
+
+We must also note that there will be multiple message nodes in the retweet graph, and thus,
  we have to decide for any given event
 which particular message node should be assigned the $q$ probability.
  Here we introduce a preferential attachment mechanism. At any time $t$,
@@ -589,6 +589,7 @@ retweets of that message.
 
 
 We now must assign probabilities of $T1$, $T2$, and $T3$ events. Let $\lambda \geq 0$ and $1 \geq p \geq 0$,
+
 \begin{align*}
     &P(T1) = \frac{\lambda}{1 + \lambda} \\
     &P(T2) = \frac{p}{1 + \lambda} \\
@@ -607,47 +608,32 @@ We now must assign probabilities of $T1$, $T2$, and $T3$ events. Let $\lambda \g
 
 Our choices of $\lambda$ and $p$ will drastically affect the dynamics of the graph, as well as the motif counts that make
 up its structure. We want to consider a series of cases for different probabilities allowing us to make informed predictions about the graph's development over time.
-
-% \begin{figure}[h!]
-%     \includegraphics[width=10cm]{Images/full-sims-graph_mid_set.png}
-%     \centering
-%     \caption{Above we see motif counts for varying parameters. The scales on the y-axis differ widely,
-%     but we also see prominence of different motifs dependent upon the parameter choices. 
-%     Some parameters lead to large, induced star subgraphs, while others may lead to
-%      highly clustered communities that share a few connections between their nodes.}
-% \end{figure}
-% \newpage
-
 The motif counts for various parameters help demonstrate the differences in scale 
-and structure which arise from different probability distributions. 
-considering $1>\lambda>0.5$ and $1>p\gg0.5$, we see an increased chance of adding
-many new root messages, but still a good possibility of introducing a new node with a new edge, but a decreased possibility of 
-adding in only new edges. For an example of the resulting motif counts we can look to figure~\ref{fig:thij0808}. 
+and structure which arise from different probability distributions. Consider the case when $0.5 > \lambda > 0$ and $0.5 \gg p > 0$. In this case, it is the $T3$ event
+expected to be the most prevalent. For these parameter values, we see in figure ~\ref{fig:thij0202} the first four greatest motif counts almost 
+everywhere in order are $H8$,$H10$,$H9$, and $H7$. The $T3$ mechansim allows for more $C_3$'s and $C_4$'s to form within the network.
+
+
+Next, consider $1>\lambda>0.5$ and $0.5 \gg p > 0$. Here the $T1$ event should dominate the dynamics
+with many new message nodes introduced to the overall retweet network. In this scenario, we have
+a greater likelihood of $T3$ events. This means those nodes without connections are likely to become connected to other message nodes. In figures
+~\ref{fig:thij0802} and ~\ref{fig:network0802} we can visualize the motif development and the overall network. Looking at the final time degree
+distribution in figure~\ref{fig:stats0802}, we see the majority of nodes are still unconnected.
+
 What about the case $0 < \lambda \ll 0.5$ and $1 > p \gg 0.5$? The probability distribution is such that adding a new node
 with an edge is the most likely outcome. These parameter choices combines with the superstar parameter $q=0.9$ means that $T2$ and $T3$
-attachments are very likely to target the root message node. Below we see the resulting star pattern in the motif counts in figure~\ref{fig:thij0208}
-and the end-result in figure ~\ref{fig:network0208}.
-
-The preferential attachment mechanism then encourages
- an induced subgraph $S_{k}$ to form with $k\gg 1$.
- For any $k \gg 3$ $S_{k}$
+attachments are very likely to target the root message node. In figure~\ref{fig:thij0208}, we see the resulting star pattern in the motif counts 
+and the end-result in figure ~\ref{fig:network0208}.The preferential attachment mechanism  encourages
+an induced subgraph $S_{k}$ to form with $k\gg 1$. For any $k \gg 3$ $S_{k}$
 itself has many appearances of $H4$ and for every increase in $k$ we see an increase in the probability
 of yet another increase in $k$.
 
-Next, consider $1>\lambda>0.5$ and $0.5 \gg p > 0$. Here the $T1$ event should dominate the dynamics
- with many new message nodes introduced to the overall retweet network. In this scenario, we have
- a greater likelihood of $T3$ events. This means those nodes without connections are likely to become connected to other message nodes. In figures
- ~\ref{fig:thij0802} and ~\ref{fig:network0802} we can visualize the motif development and the overall network. Looking at the final time degree
- distribution in figure~\ref{fig:stats0802}, we see the majority of nodes are still unconnected.
 
-Last we consider the case when $0.5 > \lambda > 0$ and $0.5 \gg p > 0$. In this case, it is the $T3$ event
- expected to be the most prevalent. For these parameter values, we see in figure ~\ref{fig:thij0202} the first four greatest motif counts almost 
- everywhere in order are $H8$,$H10$,$H9$, and $H7$. The $T3$ mechansim allows for more $C_3$'s and $C_4$'s to form within the network.
-
+Last, $1>\lambda>0.5$ and $1>p\gg0.5$, we see an increased chance of adding
+many new root messages, but still a good possibility of introducing a new node with a new edge, but a decreased possibility of 
+adding in only new edges. For an example of the resulting motif counts we can look to figure~\ref{fig:thij0808}. 
 
 % \clearpage
-
-\section{$\lambda=0.2$, $p=0.2$}
 
 \begin{figure*}[h!]
     \includegraphics[width=15cm]{Images/twitter_sim_for_stats_3_0.2_0.2.png}
@@ -675,8 +661,6 @@ Last we consider the case when $0.5 > \lambda > 0$ and $0.5 \gg p > 0$. In this 
 \end{figure*}
 
 \clearpage
-
-\section{$\lambda=0.8$, $p=0.2$}
 
 \begin{figure*}[h!]
     \includegraphics[width=15cm]{Images/twitter_sim_for_stats_3_0.8_0.2.png}
@@ -706,8 +690,6 @@ Last we consider the case when $0.5 > \lambda > 0$ and $0.5 \gg p > 0$. In this 
 \end{figure*}
 
 \clearpage
-
-\section{$\lambda=0.2$, $p=0.8$}
 
 \begin{figure*}[h!]
     \includegraphics[width=16cm]{Images/twitter_sim_for_stats_3_0.2_0.8.png}
@@ -739,8 +721,6 @@ Last we consider the case when $0.5 > \lambda > 0$ and $0.5 \gg p > 0$. In this 
 \end{figure*}
 
 \clearpage
-
-\section{$\lambda=0.8$, $p=0.8$}
 
 \begin{figure*}[h!]
     \includegraphics[width=16cm]{Images/twitter_sim_for_stats_3_0.8_0.8.png}
@@ -1083,7 +1063,7 @@ The $H10$ is the $H9$ with an extra vertex and an edge between that vertex to th
 single vertex of degree one in the $H9$. Many $H10$ appearances could be generated from a single $H9$ if vertices
 attach to the single vertex of degree one in the $H9$ motif. A star graph would form
 with that vertex at the center. The growth for the $H10$ in the preferential mechanism with $k=1$ is additive.
-For $k>1$, it is possible clusters of triangles could form causing $H10$ motif count to increase faster than by the addition of a single node and edge at each time step. 
+For $k>1$, it is possible clusters of triangles could form causing $H10$ motif count to increase faster than by the addition of a single node and edge at each time-step. 
 
 \begin{figure}[!ht]
     \includegraphics[width=12cm]{Images/H10_evolution.png}
@@ -1274,7 +1254,7 @@ the preferential attachment model with $k=1$ as it is simply the addition of a n
 connected to a single existing node. The $T2$ event, unlike the BA model, selects a message tree 
 and then uses a superstar attachment mechanism to attach to a node with probability $q=0.9$. Even when the network is relatively
 small nodes will still overwhelmingly attach to the root message node. This mechanism is
-much more probable to generate $H4$'s as seen above in chapter 3. If the root
+much more probable to generate $H4$'s as seen in chapter 3. If the root
 message node is the vertex of a $C_3$ then we may see $H7$ and $H8$ counts
 rapidly increase over time, correlating with the $H4$ count. 
 
@@ -1739,10 +1719,10 @@ parameter is for the tools of statistical analysis.
 
 
 \chapter{Motif Correlation}
-Given the analysis in chapters 4 and 5, a $T2$ or $T3$ event applied to any motif will generate a given amount of
-new motifs. We naturally expect some motifs like $H4$, $H7$, and $H8$ to correlate. We
+Given the analysis in chapters 4 and 5, a $T2$ or $T3$ event applied to any motif graph will generate a given amount of
+new motif appearances. We naturally expect some motif counts like $H4$, $H7$, and $H8$ to correlate. We
  compute correlation and covariance matrices for the time-series generated by the motif counts. There is an order of magnitude difference in covariances between
-motif counts although all are strongly correlated. All covariance matrices below are described on a log scale.
+motif counts although all are strongly correlated. All covariance matrices are described on a log scale.
  We begin with a simulation of the Barabási–Albert model
 resulting in the heat maps in figures ~\ref{fig:BAcorr1} and ~\ref{fig:BAcov1}:
 
@@ -1828,6 +1808,7 @@ attachment mechanism.
     a strong covariance relationship between $H7$, $H8$, $H9$, $H10$. In this particular graph 
     it's insightful to see these correlate together given these parameters 
     are less likely to produce the induced star subgraph we expect to see for higher $p$.}
+    \label{fig:covmat0202}
 \end{figure}
 
 \begin{figure}
@@ -1845,6 +1826,7 @@ attachment mechanism.
     \caption{$\lambda=0.2$ and $p=0.8$. Here the covariance is relatively 
     very small, except for the H4 variance. This is suggestive of 
     the high $p$ generating that induced star subgraph.}
+    \label{fig:covmat0208}
 \end{figure}
 
 \begin{figure}
@@ -1863,6 +1845,7 @@ attachment mechanism.
     \caption{$\lambda=0.8$ and $p=0.2$. We do see strong covariance around the $H4$ with 
     other motifs. There is possibly multiple induced star subgraphs connected that could
     drive this phenomena generating many $H4$'s along with other motifs.}
+    \label{fig:covmat0802}
 \end{figure}
 
 \begin{figure}
@@ -1916,8 +1899,8 @@ $$
 
 \noindent with $y_k = y(t_k) = y(k \Delta t)$. We would like a coordinate transformation to render the dynamics of the
  non-linear system much simpler. In this new coordinate system, the dynamics could be
-described linearly. We seek some $\phi$ such
-that $z = \phi(y)$ where the dynamics are much easier to evaluate in the
+described linearly. We seek a $\varphi$ such
+that $z = \varphi(y)$ where the dynamics are much easier to evaluate in the
  z-coordinates. In this context, we seek $y_{k+1} = Ky_k$.
 
 
@@ -1946,14 +1929,17 @@ $$
 Kg(x) = g(F(x)) = g(x_{k+1}) \quad g \in L_2(O)
 $$
 
-\noindent For an eigenfunction $\varphi$ of $K$ and their associated eigenvalue $\mu$ we have 
+The Koopman operator is an infinite-dimensional, linear operator which advances
+the dynamical system forward a single step in time. The infinite dimensionality
+of the Koopman operator introduces difficulties. Instead, we examine
+the spectral decomposition of the Koopman operator. For an eigenfunction $\varphi_k(x)$ of $K$ and their associated eigenvalue $\mu$ we have 
 
 
 $$
 K(\varphi(x_k)) = \mu \varphi(x_k) = \varphi(x_{k+1})
 $$
 
-\noindent A vector of observables $g$ can be written in terms of a basis of eigenvectors $\xi_j$
+\noindent  A vector of observables $g$ can be written in terms of a basis of eigenvectors $\xi_j$
 
 $$
 g(x_{k}) = \sum^{\infty}_{j=1}\varphi_j(x_k) \xi_j
@@ -1962,15 +1948,18 @@ $$
 \noindent which implies we can evolve the system like so
 
 $$
-g(x_{k+1}) = \sum^{\infty}_{k=1} \mu_j \varphi_j(x_k) \xi_j.
+g(x_{k+1}) = K(g(x_k)) = \sum^{\infty}_{j=1} \mu_j \varphi_j(x_k) \xi_j.
 $$
 
-\noindent However, finding the exact eigenfunctions, modes, and eigenvalues of $K$ analytically
-is difficult for any meaningful problem, and thus we have to resort to
+\noindent The eigenfunctions define a set of coordinates on which we can advance the measurements with a 
+linear dynamical system. The eigenfunctions are exactly the nonlinear change of coordinates we sought out.
+ However, finding the exact eigenfunctions, modes, and eigenvalues of $K$ analytically
+is difficult for any meaningful problem as the Koopman mode is infinite-dimensional. We can, however, seek to approximate
+a finite number of Koopman eigenpairs. Thus we resort to
 numerics to find them via the Dynamic Mode Decomposition.
 
 
-\section{Finding the Koopman Modes via Dynamic Mode Decomposition}
+\section{Dynamic Mode Decomposition}
 Similar to the previous section, we consider sampled data collected from a non-linear dynamical system
 of the form:
 
@@ -1981,7 +1970,7 @@ $$
 \noindent where $x(t)\in \mathbb{R}^{n}$ is a vector representing the state of the dynamical system
 at time $t$ and $\mu$ are parameter values.
  Our data is sampled at discrete points in time every $\Delta t$. Every sampling can be written as $x_{k} = x(k \Delta t)$. This 
-discrete time-flow map we denote $X_{k+1} = F(x_k)$. \
+discrete time-flow map we denote $x_{k+1} = F(x_k)$. \
 We can then extend our collected data:
 
 $$
@@ -1989,13 +1978,14 @@ y_k = g(x_k)
 $$
 
 \noindent where $g(k)$ is the set of observables formed from the state space. 
-Here we now use the Koopman operator theory to introduce a
+Here we use the Koopman operator theory to introduce a
  linear, infinite-dimensional operator $A$:
 
 $$
 A g = A g(x_k) = g(x_{k+1}),
 $$
-\noindent exactly as we described in section 8.1. $A$ advances measurements along the flow $F$ by $\Delta t$.
+
+\noindent $A$ advances measurements along the flow $F$ by $\Delta t$.
 We calculate the Koopman operator of our dynamical system in the following manner \cite{brunton2021modern}.
 Beginning with our data snapshot matrix composed of the relevant observables, we write
 
@@ -2011,7 +2001,7 @@ $$
 \end{align*}
 
 \noindent The matrix $G_+$ is simply our matrix $G_-$ taken forward one step in time. 
-The particular Koopman operator ${A}$ we wish to find, satisfies:
+The matrix ${A}$ we wish to find satisfies:
 
 $$
 G_+ = AG_-
@@ -2031,8 +2021,8 @@ $$
 
 \noindent where $\| \cdot \|_{F}$ denotes the Frobenius norm. We still have the matter of finding the 
 ${\tilde A}$ that minimizes the norm, which is our best approximation to $A$. We could
-use a least-squares fit or solve using Moore pseudo-inverse calculating $G_+G^{\dagger}_-$, but we instead
- make use of the r-rank singular value decomposition in the following way.
+use a least-squares fit or solve using Moore pseudo-inverse calculating $G_+G^{\dagger}_-$, but we use 
+the r-rank singular value decomposition in the following way.
 
 \begin{align*}
     G_+ &= {\tilde A}G_- \\
@@ -2042,21 +2032,22 @@ G_+ V_r S^{-1}_r U^{T}_r &= {\tilde A} \\
 
 Taking the r-rank of the SVD limits the number of modes and
  eigenvalues to a few that satisfy a threshold tolerance. This produces a low-rank model
- that still captures most of the information of the dynamical system. 
-The columns of $U$ are the Proper Orthogonal Decomposition modes of the
- data snapshot matrix. The associated singular values are normalized by their total.
-The singular values act as weights and can be used to discard those
- modes which don't contribute a substantial amount of energy in the decomposition.
+ that still captures most of the information of the dynamical system. Finally, we use an eigendecomposition on the left-hand side to find the 
+DMD modes $\xi_j$ and eigenvalues $\mu_j$. We can write a solution to the dynamical system for all time:
 
-Finally, we use an eigendecomposition on the left-hand side to find the 
-eigenvalues and associated modes of $A$, our Koopman modes. Once we have the Koopman modes and eigenvalues, we can begin to look at which DMD modes
+$$
+x_{k+1} \approx \sum^{r}_{n=1} b_n e^{\frac{\ln(\mu_n)t}{\Delta t}} \xi_n
+$$
+
+
+Once we have the DMD modes and eigenvalues, we can begin to look at which DMD modes
 "contribute the most" throughout the snapshot matrix by examining the associated eigenfunctions and eigenvalues which describe
-their temporal behavior: growth, decay, or oscillation. We have not yet
+their temporal behavior: growth, decay, or oscillation. We have not
  discussed how to choose $g$, how we build our dictionary of observables. If we choose $g$ to 
 be the identity mapping, then the method reduces to the standard DMD algorithm, where $g(x_i) = x_i$.
-Choosing any other function of $g$ in a meaningful way requires some a priori knowledge of the system.
-A mapping $g$ can extend the dictionary of observables beyond the state space using some appropriate 
-basis, usually a Taylor or Fourier basis. This is aptly called Extended Dynamic Mode Decomposition (EDMD) \cite{doi:10.1137/1.9781611974508}. A quick example of such
+Choosing any other function of $g$ in a meaningful way requires prior knowledge of the system or challenge. %% TODO CUTE
+A mapping $g$ can extend the dictionary of observables beyond the state space using an appropriate 
+basis. This is aptly called Extended Dynamic Mode Decomposition (EDMD) \cite{doi:10.1137/1.9781611974508}. A quick example of such
 a choice might be:
 
 $$
@@ -2079,7 +2070,10 @@ $$
 g(y_i) = {y_{i,1}, y_{i,2},\dots, y_{i,N}, y^{2}_{i,1}, y_{i,1}y_{i,2}, \dots, y^{2}_{i,N}} 
 $$
 
-\noindent This example of $g$ is one of many possible functions.
+ This example of $g$ is one of many possible functions. EDMD strengthens the connection 
+between Dynamic Mode Decomposition and Koopman Operator Theory. In fact, given a 
+choice of $g$ such that $\phi_j \in \text{span}\{g_k\}$ then the eigenvalues of the 
+Koopman operator are the DMD eigenvalues \cite{doi:10.1137/1.9781611974508}.
 
 \section{Kernel Dynamic Mode Decomposition}
 
@@ -2090,47 +2084,25 @@ variables. If one is analyzing, for instance, n-dimensional fluid flows, the fla
 can easily have thousand of entries. Extending the state-space by building a dictionary with nonlinear combinations of the 
 state space will generate very large matrices \cite{williams2015kernelbased}. For that reason, one applies the kernel trick. Instead of evaluating
 the high dimensional state space directly, one can take inner-products of the state space using kernel functions
-to ''collapse" the information of many nonlinear terms to a single value. In our analysis, our vectors are relatively small and thus not a conventional use of KDMD. 
- KDMD still offers a way to analyze nonlinear terms through the kernel trick and as we will see in chapters 9, can produce 
- Koopman modes with relatively low mode error. 
- These modes, but not their associated eigenfunctions, are similar in structure to the one's produced by DMD, but not identitical \cite{doi:10.1137/1.9781611974508}. 
+to ''collapse" the information of many nonlinear terms to a single value. 
+ In chapter 9, KDMD can produce modes with relatively low mode error \cite{doi:10.1137/1.9781611974508}. 
 We introduce the notion of the kernel.
 
 \begin{dfn}
-    We define the Kernel function $k:\mathbb{R}^n X \mathbb{R}^n \rightarrow \mathbb{R}, \quad k(x,{\hat x}) = \langle \phi(x), \phi({\hat x})\rangle$.
-     That is $k$ maps a pair of vectors to an inner product of observables of the data.
+    We define the kernel function $k:\mathbb{R}^n \times \mathbb{R}^n \rightarrow \mathbb{R}, \quad k(x,{\hat x}) = \langle \phi(x), \phi({\hat x})\rangle$.
+    $k$ maps a pair of vectors to an inner product of observables of the data.
 \end{dfn}
 
-\noindent There are a variety of different kernels that we may choose. Some include:
-
-\vspace{3mm}
-
-\noindent Sigmoid:
-$$
-f(x,x') = \text{tanh}(x^Tx' + a)
-$$
-
-\vspace{3mm}
-
-\noindent Radial: 
+\noindent There are a variety of different kernels that we may choose. In this these we use the polynomial kernel.
 
 $$
-f(x,x') = e^{-a|x-x'|^2}
-$$
-
-\vspace{3mm}
-
-
-\noindent Polynomial:
-
-$$
-f(x,x') = (1 + x^Tx')^p
+k(x,x') = (1 + x^Tx')^p
 $$
 
 \vspace{3mm}
 
 As mentioned, the kernel functions allow us to store a large amount of information in a single value. We generate matrices
-$\Phi^+$ and $\Phi^-$ from the polynomial basis function. Our data snapshots are as
+$\Phi^+$ and $\Phi^-$ from the polynomial basis function. Given our snapshot matrix $Y$
 follows:
 
 $$
@@ -2141,8 +2113,8 @@ $$
 k (y,{\hat y}) = (1 + y^T {\hat y})^p
 $$
 
-\noindent We then construct the observable matrices $\Phi^{+}\in \mathbb{C}^{n \times n}$ and $ \Phi^{-}\Phi^{+}\in \mathbb{C}^{n \times n}$.
-
+\noindent We then construct the matrices $\Phi^{+}\in \mathbb{C}^{n \times n}$ and $ \Phi^{-}\Phi^{+}\in \mathbb{C}^{n \times n}$.
+%TODO build out matrix representations
 $$
 \Phi^{+}_{i,j} = k(Y^{+}_{i}, Y^{-}_j)
 $$
@@ -2151,13 +2123,23 @@ $$
 \Phi^{-}_{i,j} = k(Y^{-}_{i}, Y^{-}_j)
 $$
 
-\noindent Then, for every element in $\Phi^{+}_{i,j}$ and $\Phi^{-}_{i,j}$, we have a kernel between two snapshots in time. The dimensionality of the
-extended observables is not constrained by the total number of snapshots. For KDMD, we finally get
-our approximations to the Koopman modes by applying the SVD and using matrix multiplication to find our approximation to the matrix $A$.
+\noindent Then, for every element in $\Phi^{+}_{i,j}$ and $\Phi^{-}_{i,j}$, we have a kernel between two snapshots in time. We finally find
+our modes as outlined in \cite{williams2015kernelbased}.
+
+Given our matrices $\Phi^{+}$, $\Phi^{-}$ we compute the singular value decomposition of $\Phi^{-} = U \Sigma V^T$. 
+We then compute
 
 $$
-\Phi^{+} = {\bar A} \Phi^{-}
+{\hat A} = (\Sigma U^T) \Phi^{+} (U^T \Sigma )
 $$
+
+\noindent Finally, we find an eigenvector $\xi$ of $A$ by solving
+
+$$
+\xi = V {\hat \xi}
+$$
+
+\noindent where ${\hat \xi}$ is an eigenvector of ${\hat A}$.
 
 \section{Accuracy Criterion}
 For the DMD and KDMD algorithms, we evaluate how
@@ -2167,7 +2149,7 @@ error $r$. We define the matrix ${\tilde G}$ where the j'th column vectors of ${
 reconstructions of the state space at time $j+1$ for $j=0,1,\dots, n-1$.
 
 $$
-{\tilde G}_{j} = \sum_{i} \mu_i b_{i,j} \xi_i
+{\tilde G}_{j} = \sum_{i} \mu_k \varphi_k(x_j) \xi_k
 $$
 
 $$
@@ -2177,7 +2159,7 @@ $$
 \noindent where $\| \cdot \|_F$ denotes the Frobenius norm.
 
 We also wish to know if the approximated modes and eigenvalues are good approximations to 
-Koopman modes. We define the Rowley criterion \cite{zhang2017evaluating}. Let $\xi_j$ and $\mu$ be a Koopman mode for the
+Koopman modes. We define the Rowley Criterion \cite{zhang2017evaluating}. Let $\xi_j$ and $\mu$ be a Koopman mode for the
  dynamical system $F$ and its corresponding eigenvalue. Provided that $\xi_j$ and $\mu_j$ are
 a true eigenpair it follows:
 
@@ -2202,7 +2184,7 @@ $$
 This equation measures how much each eigenfunction $\phi_j$ behaves like a Koopman eigenfunction. We can use 
 this to evaluate each mode individually and could potentially use it to select modes for low-rank reconstruction \cite{zhang2017evaluating}. If ${{\tilde r}_j}$ is close to one
 the eigenpair is unreliable, because the difference in the eigenpair is of the same magnitude of the eigenfunction. Therefore a 
-good eigenpair with have a mode error of $0< {{\tilde r}_j} \ll 1$.
+good eigenpair will have a mode error such that $0< {{\tilde r}_j} \ll 1$.
 
 \chapter{Results}
 
@@ -2216,7 +2198,7 @@ $$
 X = [x_1,x_2,x_3,\dots, x_n]
 $$
 
-\noindent where $x_i$ describes is a feature vector at $i \Delta t = t$. We then allow
+\noindent where $x_i$ describes a feature vector at $i \Delta t = t$. We then allow
 
 $$
 A = \frac{1}{2} \left( \frac{1}{\lambda} +  \psi(x;\lambda) \right), \quad \psi(x;\lambda) = \lambda e^{-\lambda x}
@@ -2229,8 +2211,8 @@ $$
  $\psi(x;\lambda)$ is an exponential probability distribution from which we draw a thousand samples with $\lambda=10$.
   We then distribute events in the following
 way. Let ${\hat A}$ denote a matrix that initially only contains the value $x_1$. For $k=1,2,3,\dots$ we calculate $k \delta t$. While $k\delta t < A_i$ we append $x_i$ to 
-a ${\hat A}$. Thus we generate a new matrix ${\hat A}$ that now contains $n = \sum^{N}_{i=1} A_i \mod(\delta t)$ 
-${\hat A}$. This distributes the events according to a Poisson process. After we distribute events in tome according to this process, we
+ ${\hat A}$. Thus we generate a new matrix ${\hat A}$ that now contains $n = \sum^{N}_{i=1} A_i \mod(\delta t)$ 
+${\hat A}$. This distributes the events according to a Poisson process. After we distribute events in time according to this process, we
  smooth the data with the window-average. This smoothing will help the DMD and KDMD generate better fits. Last, we center the data about its mean to improve the fit.
 
 \section{DMD: Barabási–Albert m=1}
@@ -2238,15 +2220,14 @@ We now reach the results of the DMD algorithm applied to the
 motif counts of the simulated networks. We will first examine DMD applied to the 
 Barabási–Albert motif counts. Thereafter, we examine several parameter choices for the Thij model.
 For all DMD and KDMD results, the Koopman modes
- and eigenvalues are as discussed in chapter 8. The phi modes are simply the weighting of each Koopman mode 
- at each time step. These tell us how much energy the respective Koopman mode contributes at a given time
+ and eigenvalues are as discussed in chapter 8. The $\varphi(x_k)$ eigenfunctions tell us how much energy the respective Koopman mode contributes at a given time
 step.
 
 We can now consider DMD results of the Barabási–Albert motif counts. We show in this section
 the $m=1$ and $m=2$ case to observe differences and similarities between the approximated 
 Koopman modes and eigenvalues. 
 
-For the $m=1$ case, we know that a new node and edge are added at every time step. Moreover from our
+For the $m=1$ case, we know that a new node and edge are added at every time-step. Moreover from our
 correlation and covariance heat maps, we know the only motifs that change in the $m=1$ case 
 are as such: 
 
@@ -2269,7 +2250,7 @@ are as such:
 \begin{figure*}
     \includegraphics[width=12cm]{Images/DMDm1k300eigen-2.png}
     \centering
-    \caption{Koopman modes by DMD for Barabási–Albert model
+    \caption{DMD modes for Barabási–Albert model
     with $k=1$.}
 \end{figure*}
 
@@ -2291,7 +2272,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=12cm]{Images/KDMDm1k300eigen-2.png}
     \centering
-    \caption{Koopman modes by KDMD for Barabási–Albert model
+    \caption{KDMD modes for Barabási–Albert model
     with $k=1$.}
 \end{figure*}
 
@@ -2311,14 +2292,14 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=14cm]{Images/DMDm2k300eigen-1.png}
     \centering
-    \caption{Koopman modes by DMD for the Barabási–Albert model
+    \caption{DMD modes for the Barabási–Albert model
     with $k=2$.}
 \end{figure*}
 
 \begin{figure*}
     \includegraphics[width=12cm]{Images/DMDm2k300eigen-2.png}
     \centering
-    \caption{Koopman modes by DMD for the Barabási–Albert model
+    \caption{KDMD modes for the Barabási–Albert model
     with $k=2$.}
 \end{figure*}
 
@@ -2336,7 +2317,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=12cm]{Images/KDMDm2k300eigen-2.png}
     \centering
-    \caption{Koopman modes by KDMD for the Barabási–Albert model
+    \caption{KDMD modes for the Barabási–Albert model
     with $k=2$.}
 \end{figure*}
 
@@ -2363,7 +2344,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=12cm]{Images/DMD_twitter_020209-2.png}
     \centering
-    \caption{Koopman modes by DMD for the Thij model
+    \caption{DMD modes for the Thij model
     with $\lambda=0.2$, $p=0.2$.}
 \end{figure*}
 
@@ -2384,7 +2365,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=12cm]{Images/KDMD_twitter_020209-2.png}
     \centering
-    \caption{Koopman modes by KDMD for the Thij model
+    \caption{KDMD modes for the Thij model
     with $\lambda=0.2$, $p=0.2$.}
 \end{figure*}
 
@@ -2410,7 +2391,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=12cm]{Images/DMD_twitter_020809-2.png}
     \centering
-    \caption{Koopman modes by DMD for the Thij model
+    \caption{DMD modes for the Thij model
     with $\lambda=0.2$, $p=0.8$.}
     \label{fig:dmd02082}
 \end{figure*}
@@ -2430,7 +2411,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width= 12cm]{Images/KDMD_twitter_020809-2.png}
     \centering
-    \caption{ Koopman modes by KDMD for the Thij model
+    \caption{ KDMD modes for the Thij model
     with $\lambda=0.2$, $p=0.8$.}
     \label{fig:kdmd02084}
 \end{figure*}
@@ -2458,7 +2439,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=12cm]{Images/DMD_twitter_080209-2.png}
     \centering
-    \caption{Koopman modes and phi modes by DMD for the Thij model
+    \caption{DMD modes for the Thij model
     with $\lambda=0.8$, $p=0.2$.}
 \end{figure*}
 
@@ -2477,7 +2458,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=12cm]{Images/KDMD_twitter_080209-2.png}
     \centering
-    \caption{Koopman modes and phi modes by KDMD for the Thij model
+    \caption{KDMD modes for the Thij model
     with $\lambda=0.8$, $p=0.2$.}
 \end{figure*}
 
@@ -2506,7 +2487,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=12cm]{Images/DMD_twitter_080809-2.png}
     \centering
-    \caption{Koopman modes by DMD for the Thij model
+    \caption{DMD modes for the Thij model
     with $\lambda=0.8$, $p=0.8$.}
     \label{fig:dmd08082}
 \end{figure*}
@@ -2525,7 +2506,7 @@ We now examine the same simulations through the KDMD method.
 \begin{figure*}
     \includegraphics[width=12cm]{Images/KDMD_twitter_080809-2.png}
     \centering
-    \caption{Koopman modes and phi modes by KDMD for the Thij model
+    \caption{KDMD modes for the Thij model
     with $\lambda=0.8$, $p=0.8$.}
     \label{fig:dmd08084}
 \end{figure*}
@@ -2536,16 +2517,16 @@ We now examine the same simulations through the KDMD method.
 \section{Accuracy of Methods}
 
 We want to know how DMD handles different parameter simulations of the Thij model and how it compares to KDMD.
- We also need to evaluate how the two accuracy criterion described in section 8.2 perform across
-simulations and methods. We recall that we use the one-step reconstruction error, a measure of 
+ We evaluate the two accuracy criterion described in section 8.2 across
+simulations and methods. We recall that we define the one-step reconstruction error, a measure of 
 how well the modes and eigenvalues replicate the data. We also defined the mode error describing how 
-well each DMD mode behaves like a Koopman mode. We begin with the
+well each DMD mode behaves like a true Koopman mode. We begin with the
 reconstruction error of the Barabási–Albert models.
 
 \begin{figure}
     \includegraphics[width=14cm]{Images/pref_rec_errors.png}
     \centering
-    \caption{In orange have the reconstruction error of the DMD results and in cyan 
+    \caption{In orange, have the reconstruction error of the DMD results and in cyan 
     the KDMD results. The DMD performs much better with regard to reconstruction error, by several scales of magnitude.}
     \label{fig:prefrecerror}
 \end{figure} 
@@ -2554,8 +2535,7 @@ reconstruction error of the Barabási–Albert models.
     \includegraphics[width=14cm]{Images/Pref_Mode_errors.png}
     \centering
     \caption{DMD also seems to produce modes with lower mode error. The scale on this figure is linear,
-    so the differences are not as stark in figure~\ref{fig:prefrecerror}. The KDMD method for $m=1$
-    does seem to perform comparable given that all the modes in KDMD have dynamic behavior.}
+    so the differences are not as large as in figure~\ref{fig:prefrecerror}. }
 \end{figure} 
 
 % \begin{table}
@@ -2624,11 +2604,9 @@ Now we consider the performance of DMD and KDMD on the more complex Thij model.
 \begin{figure}
     \includegraphics[width=14cm]{Images/rec_errors.png}
     \centering
-    \caption{DMD and KDMD reconstruction errors across Thij simulations. DMD here again
+    \caption{DMD and KDMD reconstruction errors across Thij simulations. DMD again
     has very low reconstruction errors compared to KDMD.}
 \end{figure}
-
-Now we can evaluate the respective mode errors.
 
 \begin{figure}
     \includegraphics[width=14cm]{Images/Mode_errors.png}
@@ -2644,54 +2622,55 @@ Examining these mode errors, we can see the modes
 from the standard DMD algorithm are just as accurate or more 
  accurate than the KDMD modes. DMD also performs much better in terms of one-step
 reconstruction error over KDMD, which is not unexpected since 
-DMD is a least-squares fit to the data. Overall the KDMD modes look to 
-be good Koopman modes. However, examining the phi modes above we see that in 
-DMD we can pick out modes which effectively contribute more to the overall energy 
-at each time step \cite{chris}. We could use to select a low rank representation
-of the data, reconstructing it with only a few nodes. However, reconstruction is not the focus 
-of this thesis.
-
+DMD is a least-squares fit to the data. Overall the KDMD modes have low mode error.
 
 \chapter{Discussion}
+
 From the results in the previous chapter, we are able to sift out differences in dynamic behavior by applying
  DMD to the motif counts. DMD produces modes that have associated temporal
 patterns: growth, decay, and oscillation. For many of these simulations, the real part of
- the approximated Koopman eigenvalues clusters around one or zero. We only see zero eigenvalues
+ the DMD eigenvalues clusters around one or zero. We only see zero eigenvalues
 given that a mode does not exhibit any temporal behavior such as in the $k=1$ Barabási–Albert 
-simulation or the $p=0.8$ Thij simulations. Otherwise our observed eigenvalues tend to cluster
+simulation or the $p=0.8$ Thij simulations. Otherwise, our observed eigenvalues tend to cluster
 in tight groups at the edge of the unit circle. 
 
-Examining the modes above we see block structure in the heatmaps in a pattern similar to those 
+Examining the modes in chapter 9, we see block structure in the heatmaps in a pattern similar to those 
 generated in the correlation and covariance matrices in chapter 7. If we look to 
 figure~\ref{fig:dmd02082} and ~\ref{fig:kdmd02084} we can pick out in the former the strongest
 DMD modes reflect an association between $H3$, $H4$, $H7$, $H8$. In the latter simulation, KDMD produces
-modes of equal amplitude throughout time but we can once again see the association between the same motifs. 
+modes of equal amplitude throughout time, but we can once again see the association between the same motifs. 
 
-For certain simulations, we have a readily available a-priori explanation
-of global network dynamics, the formation of large induced star subgraphs. The preferential
+For certain simulations, we have a readily available an a priori explanation
+of global network dynamics in the formation of large induced star subgraphs. The preferential
 attachment mechanism effectively acts as a positive feedback loop - the
-additional attachment of nodes to a node $u$ increases
-the likelihood of the future attachment to node $u$. Even without 
+additional attachment of nodes to a node increases
+the likelihood of the future attachment to that same node. Even without 
  such a tale DMD and KDMD are capable of extracting out underlying 
-structure from those simulations, for example a Thij model with $\lambda=0.8$, $p=0.2$ or $\lambda=0.8$, $p=0.8$.
+structure from these simulations.
 
-This tale of induced star subgraphs on the network is most apt when
-there is a strong preferential attachment mechanism, but not so for $T3$ events.
+A theory of induced star subgraphs on the network is most apt when
+there is a strong preferential attachment mechanism, but not so for $T3$ events. 
+The $T3$ event opens up the possibility that there are attachments between appearances of 
+motifs. A $n$ selection of motifs means an $n!$ number of motif ''joinings" to consider. In chapter 6,
+ we considered the cases when the edge is added to the graph of a single motif. A complete 
+ investigation would have to consider dynamics of inter-motif reactions. 
+
  It's true that for any of the given simulations examined, the $H4$ motif was present if not outright
-central to the formation of the network's temporal development. The development
-of other motifs alongside the $H4$ development depends on the initialization
-of the graph, especially in the Barabási–Albert model which cannot add in
-edges between any two nodes. Even for the Barabási–Albert simulations in chapter 5 
-we see that $H4$ is preparing to surpass in either the $m=2$ or $m=1$
-simulations. One might speculate, asymptotically, given a preferential attachment
-mechanism a network, $H4$ will come to be the dominant motif.
+central to the formation of the network's temporal development. That alone is not enought to
+suggest the formation of large $S_k$. In chapters 3 and 4, $S_k$ induced subgraphs cause 
+a relatively high abundance of $H4$ appearances and those motifs that have subgraphs isomorphic to
+the $H4$ graph provided the right intialization.
 
-This is further motivated by our analysis of the correlation and covariance
-matrices of the given simulations. The $H7$'s and $H8$'s generally have 
-relatively high covariances with one another and relatively high variances.
-In the analysis of their development, adding a node and an edge to either of the
-motifs generates a host of new ones either combinatorially or multiplicatively 
-respectively. 
+The correlation and covariance matrices of the motif counts show that all motifs strongly correlate with each other, but
+ the covariances across different motifs vary greatly in magnitude. For Barabási-Albert model with $m=1$, in figure~\ref{fig:BAcov1}, 
+ the motifs $H3$, $H4$, $H7$, $H8$ each have strong, positive covariances with one another. In figure~\ref{fig:BA2}, we see again the 
+ same covariance between those motif counts. In the Thij model, the covariances vary among parameter choices. For $\lambda=0.2, p=0.2$, in 
+ figure~\ref{fig:covmat0202} $H8$ has high variance relative to other motif counts, and has strong covariance with the $H7$, $H9$, and $H10$ motif counts. 
+In figure~\ref{fig:covmat0208} for  $\lambda=0.2, p=0.2$, the covariance matrix only shows high variance in the $H4$ motifs. Likewise in figure~\ref{fig:cov0802},
+we see the $H3$ motif has high, positive variance and covariance with the $H4$, $H7$, $H8$, $H9$, and $H10$ motif counts. Last, in figure~\ref{fig:covmat0808},
+$H4$ has a very high, positive variance and high, positive covariance with the $H3$ motif count. 
+The covariance and correlation matrices do not explain the DMD or KDMD modes, but they act as a companion to the sets of DMD and KDMD modes. 
+
 
 \chapter{Conclusion}
 
